@@ -12,17 +12,18 @@ import java.util.List;
 @Service
 public class DefaultPluginCollector implements PluginCollector {
 
-    private final List<FrontpagePluginInterface> frontpagePluginInterfaces;
-
-    @Autowired
-    public DefaultPluginCollector(List<FrontpagePluginInterface> frontpagePluginInterfaces) {
-
-        this.frontpagePluginInterfaces = frontpagePluginInterfaces;
-    }
+    private List<FrontpagePluginInterface> frontpagePluginInterfaces;
 
     @Override
     public List<FrontpagePluginInterface> getFrontpagePlugins() {
 
         return frontpagePluginInterfaces;
+    }
+
+
+    @Autowired(required = false)
+    public void setFrontpagePluginInterfaces(List<FrontpagePluginInterface> frontpagePluginInterfaces) {
+
+        this.frontpagePluginInterfaces = frontpagePluginInterfaces;
     }
 }
