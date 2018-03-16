@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>coffee.synyx</groupId>
+        <artifactId>coffeenet-starter-parent</artifactId>
+        <version>0.28.0</version>
+    </parent>
+
+    <name>CoffeeNet Frontpage Service</name>
+    <description>
+        A modulized frontpage of the CoffeeNet with
+        a plugin based system
+    </description>
+
+    <artifactId>frontpage</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <issueManagement>
+        <url>https://github.com/coffeenet/coffeenet-frontpage/issues</url>
+        <system>GitHub Issues</system>
+    </issueManagement>
+
+    <scm>
+        <url>https://github.com/coffeenet/coffeenet-frontpage</url>
+        <connection>scm:git:git://github.com/coffeenet/coffeenet-frontpage.git</connection>
+        <developerConnection>scm:git:git@github.com:coffeenet/coffeenet-frontpage.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <properties>
+        <docker.finalName>${project.build.finalName}</docker.finalName>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>releases.public.nexus.synyx.de</id>
+            <url>http://nexus.synyx.de/content/repositories/public-releases</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <!-- CoffeeNet -->
+        <dependency>
+            <groupId>coffee.synyx</groupId>
+            <artifactId>starter-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>coffee.synyx</groupId>
+            <artifactId>starter-discovery</artifactId>
+        </dependency>
+
+        <!-- Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+            </plugin>
+            <!-- Docker -->
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.24.0</version>
+                <configuration>
+                    <images>
+                        <image>
+                            <name>coffeenet/coffeenet-frontpage</name>
+                            <build>
+                                <dockerFileDir>${project.basedir}</dockerFileDir>
+                                <assembly>
+                                    <descriptorRef>artifact</descriptorRef>
+                                </assembly>
+                                <tags>
+                                    <tag>${project.version}</tag>
+                                    <tag>latest</tag>
+                                </tags>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

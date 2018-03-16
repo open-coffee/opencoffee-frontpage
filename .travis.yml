@@ -1,0 +1,48 @@
+sudo: required
+
+language: java
+
+script: ./mvnw verify
+
+jdk:
+- oraclejdk8
+
+services:
+- docker
+
+before_deploy:
+  - mvn -DskipTests package
+  - export JAR_FILE=$(ls target/frontpage-*.jar)
+  - echo "deploying $JAR_FILE to GitHub releases"
+
+deploy:
+  - provider: script
+    script: mvn -DskipTests package -Ddocker.username=$DOCKER_USER -Ddocker.password=$DOCKER_PASS docker:build docker:push
+    on:
+      tags: true
+  - provider: releases
+    api_key:
+      secure: M4gKoffL14CZtUCNciqaIBcMEs4n5zZ4C3JrMUFV7zSdt70apvMDKW4DY2FkPM6G6HqwN48XgT7c1CgkUhw4KZrGoLOcpBACVbhvxNk7dmVXMH3pxy74hPx7YRlz6vck9NlWupEJ5oYy0TpmAE+c5i9AhIs4vzLbwn+zFwlvjMdduPhv0iIM0ePSX6O/Tk6gWmcTeRG4s0Bm8YSdhYvyAXdW3m9dnmbWSB3/uKd0vlDQLK+cHa4kDRwtAOSehuMpn6/NlxebVhVmvNAYKao0N5QoXYPS5+Mtq4s+Ycj6FKb2aQCGYgKDBDYnAPYvZhiJ6lOcqyxkvaNUzjvw9Vp2qN3Hq9W2SUQaFguwoZ+MyOhA1/PJwZAYPg8Z/nmhUaB2B1g/0VHLQ4uKQCGS9bXwabiWxDA4PvCa0OBam/CBifTmafJyoWtX1DmwYBVkK/3CDP08Imae0A4QCcRlLm6TlaBugrQQ0TX2LM31K6flm0z745U94ZfkOyQsD5wU3CGnv4MiQn9nJrHIcR6Bq9kLPJANnWptgYb81y2WT2TABaSo7TLsr4KKqLxTLuRjEH1gA73j/FCSdq8aPk52iEF+RCiJn2uEJD/cX1Bf8Dm6WjQPfLMzf4y4HHWv8G1VhKVtnVBIIZUvuHCQfRoHKei5dlg7H36EMOD0mjckRWqYpFs=
+    file: "${JAR_FILE}"
+    skip_cleanup: true
+    on:
+      tags: true
+      repo: coffeenet/coffeenet-frontpage
+
+env:
+  global:
+  - DOCKER_HOST=tcp://127.0.0.1:2375
+  - secure: "BLroTMfqKn+Aoan4zOUAGSnDXYfomuZ+kvz3o2ooNhvBROjQue0VaKuFvY0xkc6nwPuYEA7nd6UJO0RdEm/o1n1kLdaxId5t9eDZEGTnw0tpmkkJxXWQdWfNABLjh00/yVZZLaq/PuqMx0DWzOu6zd85DUYq3aF5U+ZbZN6AQHCp9/bWPw+ENS5PXrIekdvyLkh7GMEUkgCH1lkMd5tDX1q32KiietPniG69ulieH01t8hLLb4yglKbE/sSV9TrHSMUjBDGZR85COsUMtwEB/f9U852LzuGzBPpyzvGYcUlAg6874shG+Fm7fgtV6uMNb276NtByLkVklNf6VVxlO+TKD32CAwUIS5x/ENMLTmOVwAfo9EWZxgXGxGktQQhja0vm487JTZ9xDKZZf3Wau9rkOztwYw8+hwAc4razDq/b2iKuH767+iRtYIJyNIy4UdOT4YvuR3xkj35qlKjv2WQu1PfBP190HdgyJ0CUdORvn+SxnLOwJTKQq4u0O6wvivWBhLlCyR8fZFm9d3s4bNYaj3Tz9Kjb5pzrN5pAV78GzZ/CD/BmRIXO45EwyNLseKdU/62L8de87oVbHcpzR8Qmm4RBJfYgOz/5HuBORcSqFYHqgoqmCHmAlFjtSn6ps90nd0jnqZvS1kqG0YfaH2uFJR6kAVoKzwaq+8tBIXI="
+  - secure: "VCyML7j7atV3vG9hvY7qGiA6AfDhLkf5d6N3zWMejv4yq3aJU0C91ZtViWa5HxnlAZthT/wDWTDZh+HosR08z8vFY8RjbltgTsIakRal46z/vffmpxKW1ik8OMeSOd1JaGNKSnALZEud+ARSnzTL5hiWGdwTf/cQpPKhX39SfJNUDVRa8+DYh49KjKO9Gp8oG0zMdEvq26K2Srv6VbUV0V0AUvr7Gh3gRQ1JV2FB9bDsVmgbHjBrbIoU+yl5gEG+RUv7fiE4cCqjSyXT/7rA/As/nUYWWw6x9cVKQ7tEjA3Rye1bFEIlkDqhnGdV1MjaR7/Vf59/U3ba6ZR2kjGzxNJop3BI5ZQqTX7dL8f2XxB4VR0Yapn5+oQ9X7DPTbS/wH3MSv9AOW3W7toxEgVWlJ/bmj51yDhVOtvBtj5KEWp2Vnl78jwl+9xuUduztsntCujPqOgEz5ok52kfhK69oUYec6jUMyrcFVE7FSEdQVxfDtKulL6gnTm1olhGi6DxHBKmzXjVXSsl81s+b4+Xbo6HEwVVc+bQtbCws/Ap7sGS5Y8dUSWHcO5z7Tg14AjCxkOhPVqfv+3WvuHQwJijQcOLGnp4u2JKLEzeneKo4huVHqRQ7wGujXzmAmSIr3KFoe7g1X7pfgay9Nr50wJ0ZpZJvCNBjh1c79PlU1mTKDc="
+notifications:
+  irc:
+    channels:
+      - "irc.synyx.de#CoffeeNet"
+    on_success: change # default: always
+    on_failure: always # default: always
+    use_notice: true
+    skip_join: true
+
+cache:
+  directories:
+    - $HOME/.m2

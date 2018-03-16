@@ -1,0 +1,10 @@
+coffeenet:
+  profile: development
+  application-name: CoffeeNet Frontpage
+  security:
+    client:
+      client-id: coffeeNetClient
+      client-secret: coffeeNetClientSecret
+  logging:
+    console:
+      enabled: true
