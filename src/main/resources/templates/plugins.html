@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="coffeenet/_layout">
+
+<body>
+<main layout:fragment="coffeenet-main">
+    <th:block th:each="plugin : ${plugins}">
+        <p th:text="${plugin.html}"></p>
+    </th:block>
+
+</main>
+</body>
+</html>
