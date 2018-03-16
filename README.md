@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/coffeenet/coffeenet-frontpage.svg?branch=master)](https://travis-ci.org/coffeenet/coffeenet-frontpage)
+
 # CoffeeNet Frontpage
 
 <p align="center">
