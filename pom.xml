@@ -60,6 +60,17 @@
             <artifactId>starter-discovery</artifactId>
         </dependency>
 
+        <!-- Spring Config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.marcosbarbero.cloud</groupId>
+            <artifactId>spring-cloud-config-client-oauth2</artifactId>
+            <version>1.0.2.RELEASE</version>
+        </dependency>
+
         <!-- Frontend -->
         <dependency>
             <groupId>coffee.synyx</groupId>
