@@ -2,15 +2,24 @@ package coffee.synyx.frontpage;
 
 class PluginDto {
 
-    private final String html;
+    private final String title;
+    private final String content;
 
-    PluginDto(String html) {
+    PluginDto(String title, String content) {
 
-        this.html = html;
+        this.title = title;
+
+        this.content = content;
     }
 
-    public String getHtml() {
+    public String getTitle() {
 
-        return html;
+        return title;
+    }
+
+
+    public String getContent() {
+
+        return content;
     }
 }
