@@ -3,12 +3,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="coffeenet/_layout">
 
+<head>
+  <link rel="stylesheet" href="css/coffeenet-frontpage-style.css" />
+</head>
+
 <body>
 <main layout:fragment="coffeenet-main">
+  <div class="plugin-grid">
     <th:block th:each="plugin : ${plugins}">
+      <div class="plugin-grid__cell">
         <p th:text="${plugin.content}"></p>
+      </div>
     </th:block>
-
+  </div>
 </main>
 </body>
 </html>
