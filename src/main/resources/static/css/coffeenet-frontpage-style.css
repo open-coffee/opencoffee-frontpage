@@ -1,0 +1,36 @@
+.plugin-grid {
+    /* Grid Fallback */
+    display: flex;
+    flex-wrap: wrap;
+    /* Supports Grid */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    grid-auto-rows: minmax(20rem, auto);
+    gap: 1rem .5rem;
+    padding: 1rem;
+}
+
+.plugin-grid__cell {
+    /* Flex Fallback */
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    flex: 1 1 25rem;
+    /* Demo-Specific Styles */
+    height: 20rem;
+    background: #e8e8e8;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.plugin-grid__cell__title {
+    margin: 0;
+    padding: 1rem;
+    border: 0 solid #c1c1c1;
+    border-bottom-width: 1px;
+}
+
+.plugin-grid__cell__content {
+    padding: 1rem;
+    margin: 0;
+    border: 0 solid #f5f5f5;
+    border-top-width: 1px;
+}
