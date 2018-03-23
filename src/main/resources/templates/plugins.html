@@ -12,8 +12,8 @@
   <div class="plugin-grid">
     <th:block th:each="plugin : ${plugins}">
       <div class="plugin-grid__cell">
-        <h2 th:text="${plugin.title}"></h2>
-        <p th:text="${plugin.content}"></p>
+        <h2 class="plugin-grid__cell__title" th:text="${plugin.title}"></h2>
+        <p class="plugin-grid__cell__content" th:text="${plugin.content}"></p>
       </div>
     </th:block>
   </div>
