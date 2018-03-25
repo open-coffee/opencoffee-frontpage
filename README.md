@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/coffeenet/coffeenet-frontpage.svg?branch=master)](https://travis-ci.org/coffeenet/coffeenet-frontpage)
+[![Coverage Status](https://coveralls.io/repos/github/coffeenet/coffeenet-frontpage/badge.svg?branch=master)](https://coveralls.io/github/coffeenet/coffeenet-frontpage?branch=master)
 
 # CoffeeNet Frontpage
 
