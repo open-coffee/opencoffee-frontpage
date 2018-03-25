@@ -2,7 +2,7 @@ sudo: required
 
 language: java
 
-script: ./mvnw verify
+script: ./mvnw verify jacoco:report coveralls:report
 
 jdk:
 - oraclejdk8
