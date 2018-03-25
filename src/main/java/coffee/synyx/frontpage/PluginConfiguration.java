@@ -9,5 +9,5 @@ import org.springframework.plugin.core.config.EnablePluginRegistries;
 
 @Configuration
 @EnablePluginRegistries(FrontpagePluginInterface.class)
-public class PluginConfiguration {
+class PluginConfiguration {
 }

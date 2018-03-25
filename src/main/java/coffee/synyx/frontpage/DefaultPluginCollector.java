@@ -10,7 +10,6 @@ import org.springframework.plugin.core.PluginRegistry;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Service
@@ -25,8 +24,8 @@ public class DefaultPluginCollector implements PluginCollector {
     }
 
     @Override
-    public Optional<List<FrontpagePluginInterface>> getFrontpagePlugins() {
+    public List<FrontpagePluginInterface> getFrontpagePlugins() {
 
-        return Optional.ofNullable(pluginRegistry.getPlugins());
+        return pluginRegistry.getPlugins();
     }
 }
