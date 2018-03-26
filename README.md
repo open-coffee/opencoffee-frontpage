@@ -8,5 +8,5 @@
 </p>
 
 <p align="center">
-    a personalisable frontpage for the CoffeeNet
+    the personalisable frontpage of the CoffeeNet
 </p>
