@@ -4,22 +4,22 @@
       layout:decorator="coffeenet/_layout">
 
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-    <title th:text="#{frontpage.title}"></title>
-    <link rel="stylesheet" href="css/coffeenet-frontpage-style.css"/>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title th:text="#{frontpage.title}"></title>
+  <link rel="stylesheet" href="css/coffeenet-frontpage-style.css"/>
 </head>
 
 <body>
 <main layout:fragment="coffeenet-main">
-    <div class="plugin-grid">
-        <th:block th:each="plugin : ${plugins}">
-            <div class="plugin-grid__cell">
-                <h2 class="plugin-grid__cell__title" th:text="${plugin.title}"></h2>
-                <p class="plugin-grid__cell__content" th:text="${plugin.content}"></p>
-            </div>
-        </th:block>
-    </div>
+  <div class="plugin-grid">
+    <th:block th:each="plugin : ${plugins}">
+      <div class="plugin-grid__cell">
+        <h2 class="plugin-grid__cell__title" th:text="${plugin.title}"></h2>
+        <p class="plugin-grid__cell__content" th:text="${plugin.content}"></p>
+      </div>
+    </th:block>
+  </div>
 </main>
 </body>
 </html>
