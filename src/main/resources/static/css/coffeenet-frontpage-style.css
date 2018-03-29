@@ -12,6 +12,7 @@
 }
 
 .plugin-grid__cell {
+  position: relative;
   /* Flex Fallback */
   margin-left: 0.3rem;
   margin-right: 0.3rem;
