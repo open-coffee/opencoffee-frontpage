@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
       layout:decorator="coffeenet/_layout">
 
 <head>
@@ -13,12 +13,30 @@
 <body>
 <main layout:fragment="coffeenet-main">
   <div class="plugin-grid">
-    <th:block th:each="plugin : ${plugins}">
+    <th:block th:each="userPlugin : ${userPlugins}">
       <div class="plugin-grid__cell">
-        <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(plugin.title)}" th:text="${plugin.title}"></h2>
-        <div class="plugin-grid__cell__content" th:utext="${plugin.content}"></div>
+        <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(userPlugin.title)}"
+            th:text="${userPlugin.title}"></h2>
+        <div class="plugin-grid__cell__content" th:utext="${userPlugin.content}"></div>
+        <form th:id="plugin-remove- + ${userPlugin.id}" th:action="@{/plugins/{id}(id=${userPlugin.id})}"
+              th:method="delete">
+          <span class="plugin-grid__cell__close"
+                th:onclick="'document.getElementById(\'plugin-remove-' + ${userPlugin.id} + '\').submit();'"
+                th:title="#{plugin.remove}"></span>
+        </form>
       </div>
     </th:block>
+  </div>
+  <div class="plugin-add-container">
+    <div class="plugin-grid-add">
+      <th:block th:each="plugin : ${plugins}">
+        <div class="plugin-grid-add__cell">
+          <form th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="put">
+            <button th:text="${plugin.id}" th:title="#{plugin.add}"></button>
+          </form>
+        </div>
+      </th:block>
+    </div>
   </div>
 </main>
 </body>

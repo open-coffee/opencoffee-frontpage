@@ -41,3 +41,30 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.plugin-grid__cell__close:before {
+  content: '✕';
+}
+
+.plugin-grid__cell__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.plugin-add-container {
+  position: absolute;
+  bottom: 0;
+}
+
+.plugin-grid-add {
+  display: flex;
+  padding: 1rem;
+}
+
+.plugin-grid-add__cell {
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
