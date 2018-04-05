@@ -2,6 +2,7 @@ package coffee.synyx.frontpage;
 
 import coffee.synyx.frontpage.plugin.api.FrontpagePluginInterface;
 import coffee.synyx.frontpage.plugin.api.FrontpagePluginQualifier;
+import io.netty.util.internal.ConcurrentSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class DefaultPluginService implements PluginService {
     private static final Logger LOGGER = LoggerFactory.getLogger(lookup().lookupClass());
 
     private final ConcurrentHashMap<String, Set<String>> pluginsStore = new ConcurrentHashMap<>();
+    private final ConcurrentSet<String> ignoredPlugins = new ConcurrentSet<>();
 
     private final PluginRegistry<FrontpagePluginInterface, FrontpagePluginQualifier> pluginRegistry;
 
@@ -38,7 +40,7 @@ public class DefaultPluginService implements PluginService {
     public List<FrontpagePluginInterface> getPluginsOf(String username) {
         Set<String> userPluginIds = pluginsStore.getOrDefault(username, emptySet());
 
-        return pluginRegistry.getPlugins().stream()
+        return this.getAvailablePlugins().stream()
             .filter(plugin -> userPluginIds.contains(plugin.id()))
             .collect(toList());
     }
@@ -70,6 +72,20 @@ public class DefaultPluginService implements PluginService {
     @Override
     public List<FrontpagePluginInterface> getAvailablePlugins() {
 
-        return pluginRegistry.getPlugins();
+        List<FrontpagePluginInterface> availablePlugins = this.pluginRegistry.getPlugins().stream()
+            .filter(plugin -> !ignoredPlugins.contains(plugin.id()))
+            .collect(toList());
+
+        LOGGER.debug("/> {} plugins are available", availablePlugins.size());
+
+        return availablePlugins;
+    }
+
+    @Override
+    public void ignorePlugin(String pluginId) {
+
+        ignoredPlugins.add(pluginId);
+
+        LOGGER.warn("/> Plugins with the ids '{}' are ignored now", pluginId);
     }
 }

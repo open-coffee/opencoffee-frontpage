@@ -3,38 +3,24 @@ package coffee.synyx.frontpage;
 import coffee.synyx.autoconfigure.security.service.CoffeeNetCurrentUserService;
 import coffee.synyx.autoconfigure.security.service.HumanCoffeeNetUser;
 import coffee.synyx.frontpage.plugin.api.FrontpagePluginInterface;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import org.junit.runner.RunWith;
-
 import org.mockito.Mock;
-
 import org.mockito.runners.MockitoJUnitRunner;
-
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.Arrays;
 import java.util.Optional;
 
-import static java.util.Collections.emptySet;
-import static java.util.Collections.singletonList;
+import static java.util.Collections.*;
 import static org.hamcrest.Matchers.hasSize;
-
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
-
-import static java.util.Collections.emptyList;
 
 
 @RunWith(MockitoJUnitRunner.class)
@@ -114,7 +100,7 @@ public class PluginsControllerTest {
         return standaloneSetup(sut).build().perform(builder);
     }
 
-    class NumberPlugin implements FrontpagePluginInterface {
+    private class NumberPlugin implements FrontpagePluginInterface {
 
         @Override
         public String title() {
@@ -135,7 +121,7 @@ public class PluginsControllerTest {
         }
     }
 
-    class TextPlugin implements FrontpagePluginInterface {
+    private class TextPlugin implements FrontpagePluginInterface {
 
         @Override
         public String title() {

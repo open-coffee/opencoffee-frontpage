@@ -42,4 +42,12 @@ public interface PluginService {
      * @return list of all available plugins
      */
     List<FrontpagePluginInterface> getAvailablePlugins();
+
+
+    /**
+     * Ignores this plugin for all users
+     *
+     * @param pluginId to ignore
+     */
+    void ignorePlugin(String pluginId);
 }
