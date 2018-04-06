@@ -92,6 +92,21 @@ public class DefaultPluginServiceTest {
     }
 
 
+    @Test
+    public void getOnlyAvailablePlugins() {
+
+        final TextPlugin textPlugin = new TextPlugin();
+        final NumberPlugin numberPlugin = new NumberPlugin();
+        when(pluginRegistry.getPlugins()).thenReturn(asList(textPlugin, numberPlugin));
+
+        sut.ignorePlugin("Text");
+
+        final List<FrontpagePluginInterface> availablePlugins = sut.getAvailablePlugins();
+        assertThat(availablePlugins).hasSize(1);
+        assertThat(availablePlugins).contains(numberPlugin);
+    }
+
+
     private class TextPlugin implements FrontpagePluginInterface {
 
         @Override
