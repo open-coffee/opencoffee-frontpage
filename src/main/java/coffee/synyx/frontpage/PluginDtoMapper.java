@@ -14,9 +14,9 @@ class PluginDtoMapper {
         // nothing
     }
 
-    static PluginDto mapToPluginDto(FrontpagePluginInterface frontpagePluginInterface) {
+    private static PluginDto mapToPluginDto(FrontpagePluginInterface frontpagePluginInterface) {
 
-        return new PluginDto(frontpagePluginInterface.title(), frontpagePluginInterface.content());
+        return new PluginDto(frontpagePluginInterface.title(), frontpagePluginInterface.content(), frontpagePluginInterface.id());
     }
 
 
