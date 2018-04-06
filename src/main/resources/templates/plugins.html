@@ -32,7 +32,7 @@
       <th:block th:each="plugin : ${plugins}">
         <div class="plugin-grid-add__cell">
           <form th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="put">
-            <button th:text="${plugin.id}" th:title="#{plugin.add}"></button>
+            <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button--primary puffy"></button>
           </form>
         </div>
       </th:block>
