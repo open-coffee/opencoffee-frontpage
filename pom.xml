@@ -97,7 +97,7 @@
     <dependency>
       <groupId>coffee.synyx</groupId>
       <artifactId>frontpage-plugin-api</artifactId>
-      <version>0.3.0-SNAPSHOT</version>
+      <version>0.3.0</version>
     </dependency>
 
     <dependency>
