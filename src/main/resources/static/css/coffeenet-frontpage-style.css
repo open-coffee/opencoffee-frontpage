@@ -53,19 +53,20 @@
   cursor: pointer;
 }
 
-.plugin-add-container {
-  position: absolute;
-  bottom: 0;
-}
-
-.plugin-grid-add {
+.add-plugin-container {
   display: flex;
-  padding: 1rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: .5rem;
 }
 
-.plugin-grid-add__cell {
-  margin-left: 0.3rem;
-  margin-right: 0.3rem;
+.add-plugin-container__item:not(:last-child) {
+  margin-right: .75rem;
+}
+
+.add-plugin-container__item {
+  /* add a gap for wrapped items */
+  margin-bottom: .75rem;
 }
 
 .button--primary {
@@ -86,11 +87,11 @@
   background-color: #8BC34A;
   border: none;
   border-radius: 5px;
-  box-shadow: 0 5px #4e6061;
+  border-bottom: 5px solid #4e6061;
 }
 
 .button--primary:active,
 .button--primary:focus {
-  box-shadow: 0 3px #4e6061;
+  border-bottom: 3px solid #4e6061;
   transform: translateY(2px);
 }

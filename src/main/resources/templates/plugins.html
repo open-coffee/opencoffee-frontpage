@@ -12,6 +12,14 @@
 
 <body>
 <main layout:fragment="coffeenet-main">
+
+  <div class="add-plugin-container">
+    <div th:each="availablePlugin : ${availablePlugins}" class="add-plugin-container__item">
+      <a th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}" th:text=" ${availablePlugin.id}"
+         th:title="#{plugin.add}" class="button--primary puffy"></a>
+    </div>
+  </div>
+
   <div class="plugin-grid">
     <th:block th:each="myPlugin : ${myPlugins}">
       <div class="plugin-grid__cell">
@@ -32,17 +40,6 @@
         </form>
       </div>
     </th:block>
-  </div>
-
-  <div class="plugin-add-container">
-    <div class="plugin-grid-add">
-      <th:block th:each="availablePlugin : ${availablePlugins}">
-        <div class="plugin-grid-add__cell">
-          <a th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}" th:text=" ${availablePlugin.id}"
-             th:title="#{plugin.add}" class="button--primary puffy"></a>
-        </div>
-      </th:block>
-    </div>
   </div>
 
 </main>
