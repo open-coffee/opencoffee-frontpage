@@ -15,7 +15,7 @@
 
     <div th:each="field : ${configuration}">
       <label th:for="${field.id}" for="id" th:text="${field.label}"></label>
-      <input th:name="${field.id}" th:type="${field.type}" th:id="${field.id}" id="id"/>
+      <input th:name="${field.id}" th:type="${field.type}" th:id="${field.id}" id="id" th:attr="required=${field.required ? '' : null}" />
     </div>
 
     <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button--primary puffy"></button>
