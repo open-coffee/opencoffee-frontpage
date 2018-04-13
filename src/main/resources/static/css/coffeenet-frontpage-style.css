@@ -69,29 +69,46 @@
   margin-bottom: .75rem;
 }
 
-.button--primary {
-  color: #ffffff;
+.button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: .2em;
+  border-bottom: .2em solid #4e6061;
+  min-width: 6em;
   text-align: center;
-  cursor: pointer;
-  font-size: 1rem;
-  text-shadow: 0 1px #4e6061;
 }
+
+button.button {
+  outline: none;
+}
+
+a.button,
+a.button:active,
+a.button:focus,
+a.button:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+.button--primary {
+  background-color: #8BC34A;
+}
+
 .button--primary.puffy {
   font-size: 1.2rem;
 }
 
-/*Button One*/
-.button--primary {
-  padding: 20px 60px;
-  outline: none;
-  background-color: #8BC34A;
-  border: none;
-  border-radius: 5px;
-  border-bottom: 5px solid #4e6061;
+.button--primary.micro {
+  font-size: 0.8rem;
+}
+
+.button:active,
+.button:focus {
+  transform: translateY(.1em);
 }
 
 .button--primary:active,
 .button--primary:focus {
-  border-bottom: 3px solid #4e6061;
-  transform: translateY(2px);
+  border-bottom: .15em solid #4e6061;
 }
