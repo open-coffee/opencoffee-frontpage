@@ -1,12 +1,16 @@
 package coffee.synyx.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePluginInterface;
+import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
+import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
+import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.event.ContextRefreshedEvent;
+
+import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static org.mockito.Mockito.*;
@@ -38,66 +42,72 @@ public class PluginValidatorTest {
         verify(pluginService).ignorePlugin("SameId");
     }
 
-    private class DifferentIdPlugin implements FrontpagePluginInterface {
+    private class DifferentIdPlugin implements FrontpagePlugin {
 
         @Override
-        public String title() {
-
-            return "There is a different plugin";
+        public String title(ConfigurationInstance configurationInstance) {
+            return null;
         }
 
-
         @Override
-        public String content() {
-
-            return "i am the diff";
+        public String content(ConfigurationInstance configurationInstance) {
+            return null;
         }
 
         @Override
         public String id() {
             return "DifferentId";
         }
+
+        @Override
+        public Optional<ConfigurationDescription> getConfigurationDescription() {
+            return Optional.empty();
+        }
     }
 
-    private class NumberPlugin implements FrontpagePluginInterface {
+    private class NumberPlugin implements FrontpagePlugin {
 
         @Override
-        public String title() {
-
-            return "There is a number";
+        public String title(ConfigurationInstance configurationInstance) {
+            return null;
         }
 
-
         @Override
-        public String content() {
-
-            return "i am the 2";
+        public String content(ConfigurationInstance configurationInstance) {
+            return null;
         }
 
         @Override
         public String id() {
             return "SameId";
         }
+
+        @Override
+        public Optional<ConfigurationDescription> getConfigurationDescription() {
+            return Optional.empty();
+        }
     }
 
-    private class TextPlugin implements FrontpagePluginInterface {
+    private class TextPlugin implements FrontpagePlugin {
 
         @Override
-        public String title() {
-
-            return "There is a text";
+        public String title(ConfigurationInstance configurationInstance) {
+            return null;
         }
 
-
         @Override
-        public String content() {
-
-            return "Good old text";
+        public String content(ConfigurationInstance configurationInstance) {
+            return null;
         }
 
         @Override
         public String id() {
             return "SameId";
+        }
+
+        @Override
+        public Optional<ConfigurationDescription> getConfigurationDescription() {
+            return Optional.empty();
         }
     }
 }
