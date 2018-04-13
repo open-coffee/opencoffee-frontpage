@@ -1,6 +1,6 @@
 package coffee.synyx.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePluginInterface;
+import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,16 +31,16 @@ class PluginValidator implements ApplicationListener<ContextRefreshedEvent> {
 
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
-        List<FrontpagePluginInterface> availablePlugins = pluginService.getAvailablePlugins();
+        List<FrontpagePlugin> availablePlugins = pluginService.getAvailablePlugins();
         LOGGER.debug("/> {} plugins are generally available: {}", pluginService.getAvailablePlugins().size(), availablePlugins.toArray());
 
         ignorePluginsWithDuplicatedIds(availablePlugins);
     }
 
 
-    private void ignorePluginsWithDuplicatedIds(List<FrontpagePluginInterface> availablePlugins) {
+    private void ignorePluginsWithDuplicatedIds(List<FrontpagePlugin> availablePlugins) {
         availablePlugins.stream()
-            .collect(groupingBy(FrontpagePluginInterface::id)).values().stream()
+            .collect(groupingBy(FrontpagePlugin::id)).values().stream()
             .filter(pluginsWithSameId -> pluginsWithSameId.size() > 1)
             .forEach(pluginWithSameIds -> {
 

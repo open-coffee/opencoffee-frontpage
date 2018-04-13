@@ -13,31 +13,38 @@
 <body>
 <main layout:fragment="coffeenet-main">
   <div class="plugin-grid">
-    <th:block th:each="userPlugin : ${userPlugins}">
+    <th:block th:each="myPlugin : ${myPlugins}">
       <div class="plugin-grid__cell">
-        <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(userPlugin.title)}"
-            th:text="${userPlugin.title}"></h2>
-        <div class="plugin-grid__cell__content" th:utext="${userPlugin.content}"></div>
-        <form th:id="plugin-remove- + ${userPlugin.id}" th:action="@{/plugins/{id}(id=${userPlugin.id})}"
+        <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(myPlugin.title)}"
+            th:text="${myPlugin.title}">
+          myPluginTitle
+        </h2>
+
+        <div class="plugin-grid__cell__content" th:utext="${myPlugin.content}">
+          myPluginContent
+        </div>
+
+        <form th:id="plugin-remove- + ${myPlugin.uuid}" th:action="@{/plugins/{id}(id=${myPlugin.uuid})}"
               th:method="delete">
           <span class="plugin-grid__cell__close"
-                th:onclick="'document.getElementById(\'plugin-remove-' + ${userPlugin.id} + '\').submit();'"
+                th:onclick="'document.getElementById(\'plugin-remove-' + ${myPlugin.uuid} + '\').submit();'"
                 th:title="#{plugin.remove}"></span>
         </form>
       </div>
     </th:block>
   </div>
+
   <div class="plugin-add-container">
     <div class="plugin-grid-add">
-      <th:block th:each="plugin : ${plugins}">
+      <th:block th:each="availablePlugin : ${availablePlugins}">
         <div class="plugin-grid-add__cell">
-          <form th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="put">
-            <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button--primary puffy"></button>
-          </form>
+          <a th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}" th:text=" ${availablePlugin.id}"
+             th:title="#{plugin.add}" class="button--primary puffy"></a>
         </div>
       </th:block>
     </div>
   </div>
+
 </main>
 </body>
 </html>

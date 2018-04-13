@@ -1,8 +1,10 @@
 package coffee.synyx.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePluginInterface;
+import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * @author Tobias Schneider
@@ -10,30 +12,49 @@ import java.util.List;
 public interface PluginService {
 
     /**
-     * Returns a list of frontpage plugins for the given user
+     * Returns a list of frontpage plugin instances for the given user
      *
      * @param username to filter the plugins
-     * @return list of plugins
+     * @return list of {@link PluginInstance}
      */
-    List<FrontpagePluginInterface> getPluginsOf(String username);
+    Set<PluginInstance> getPluginInstancesOf(String username);
+
+
+    /**
+     * Adds a plugin for the given user without a configuration
+     *
+     * @param username to add the plugin to
+     * @param pluginId of the plugin to add
+     */
+    void savePluginInstance(String username, String pluginId);
 
 
     /**
      * Adds a plugin for the given user
      *
-     * @param pluginId of the plugin to add
-     * @param username to add the plugin to
+     * @param username              to add the plugin to
+     * @param pluginId              of the plugin to add
+     * @param configurationInstance to configure the plugin
      */
-    void addPlugin(String pluginId, String username);
+    void savePluginInstance(String username, String pluginId, ConfigurationInstanceImpl configurationInstance);
 
 
     /**
      * Removes a plugin from the given user
      *
-     * @param pluginId of the plugin to remove
-     * @param username to remove the plugin from
+     * @param username         to remove the plugin from
+     * @param pluginInstanceId of the plugin to remove
      */
-    void removePlugin(String pluginId, String username);
+    void removePluginInstance(String username, String pluginInstanceId);
+
+
+    /**
+     * Returns the plugin with the given id
+     *
+     * @param pluginId of the plugin to return
+     * @return plugin with the given id
+     */
+    Optional<FrontpagePlugin> getPlugin(String pluginId);
 
 
     /**
@@ -41,7 +62,7 @@ public interface PluginService {
      *
      * @return list of all available plugins
      */
-    List<FrontpagePluginInterface> getAvailablePlugins();
+    List<FrontpagePlugin> getAvailablePlugins();
 
 
     /**

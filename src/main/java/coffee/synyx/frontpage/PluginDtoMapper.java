@@ -1,6 +1,6 @@
 package coffee.synyx.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePluginInterface;
+import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 
 import java.util.List;
 
@@ -14,14 +14,14 @@ class PluginDtoMapper {
         // nothing
     }
 
-    private static PluginDto mapToPluginDto(FrontpagePluginInterface frontpagePluginInterface) {
+    static PluginDto mapToPluginDto(FrontpagePlugin frontpagePlugin) {
 
-        return new PluginDto(frontpagePluginInterface.title(), frontpagePluginInterface.content(), frontpagePluginInterface.id());
+        return new PluginDto(frontpagePlugin.id());
     }
 
 
-    static List<PluginDto> mapToPluginDtos(List<FrontpagePluginInterface> frontpagePluginInterfaces) {
+    static List<PluginDto> mapToPluginDtos(List<FrontpagePlugin> frontpagePlugins) {
 
-        return frontpagePluginInterfaces.stream().map(PluginDtoMapper::mapToPluginDto).collect(toList());
+        return frontpagePlugins.stream().map(PluginDtoMapper::mapToPluginDto).collect(toList());
     }
 }

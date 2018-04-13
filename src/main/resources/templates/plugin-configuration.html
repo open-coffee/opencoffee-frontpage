@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="coffeenet/_layout">
+
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+</head>
+
+<body>
+<main layout:fragment="coffeenet-main">
+  <form th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post">
+
+    <div th:each="field : ${configuration}">
+      <label th:for="${field.id}" for="id" th:text="${field.label}"></label>
+      <input th:name="${field.id}" th:type="${field.type}" th:id="${field.id}" id="id"/>
+    </div>
+
+    <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button--primary puffy"></button>
+  </form>
+</main>
+</body>
+</html>
