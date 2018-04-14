@@ -147,6 +147,7 @@ a.button:visited {
   width: auto;
 }
 
+.plugin-configuration__input.invalid:invalid,
 .plugin-configuration.invalid .plugin-configuration__input:invalid {
   background-color: #ffe0e0;
   border: 1px solid #fa8072;
