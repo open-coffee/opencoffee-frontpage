@@ -12,7 +12,7 @@
 
 <body>
 <main layout:fragment="coffeenet-main">
-  <form th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post" class="plugin-configuration">
+  <form id="plugin-configuration-form" th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post" class="plugin-configuration">
     <div class="plugin-configuration__fields">
       <th:block th:each="field : ${configuration}">
         <label th:for="${field.id}" for="id" th:text="${field.label}" class="plugin-configuration__label"></label>

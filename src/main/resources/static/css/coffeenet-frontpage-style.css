@@ -147,6 +147,11 @@ a.button:visited {
   width: auto;
 }
 
+.plugin-configuration__input:invalid {
+  background-color: #ffe0e0;
+  border: 1px solid #fa8072;
+}
+
 .button-toolbar {
   display: flex;
   flex-direction: row;
