@@ -147,9 +147,20 @@ a.button:visited {
   width: auto;
 }
 
-.plugin-configuration__input:invalid {
+.plugin-configuration.invalid .plugin-configuration__input:invalid {
   background-color: #ffe0e0;
   border: 1px solid #fa8072;
+}
+
+.plugin-configuration .plugin-configuration__input + .error {
+  grid-column: span 2;
+  text-align: right;
+  /* avoid doubled grid-gap */
+  margin-top: -0.5rem;
+}
+
+.plugin-configuration .plugin-configuration__input + .error:empty {
+  height: 0;
 }
 
 .button-toolbar {

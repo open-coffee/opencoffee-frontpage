@@ -12,7 +12,7 @@
 
 <body>
 <main layout:fragment="coffeenet-main">
-  <form id="plugin-configuration-form" th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post" class="plugin-configuration">
+  <form id="plugin-configuration-form" th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post" class="plugin-configuration invalid">
     <div class="plugin-configuration__fields">
       <th:block th:each="field : ${configuration}">
         <label th:for="${field.id}" for="id" th:text="${field.label}" class="plugin-configuration__label"></label>
@@ -24,6 +24,38 @@
       <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button button--primary micro align--right"></button>
     </div>
   </form>
+  <script>
+    (function() {
+      const form = document.getElementById('plugin-configuration-form');
+      // disable native validation
+      form.noValidate = true;
+      form.classList.remove('invalid');
+
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          form.classList.add('invalid');
+        }
+      });
+
+      for (const field of form.querySelectorAll('input')) {
+        // Add error container
+        field.insertAdjacentHTML('afterend', '<div class="error"></div>');
+        // Show message on `invalid` event
+        field.addEventListener('invalid', event => {
+          field.nextSibling.textContent = field.validationMessage;
+
+          // Reset invalid state and error message on `input` event, trigger validation check
+          const handleInput = () => {
+            field.removeEventListener('input', handleInput);
+            field.nextSibling.textContent = '';
+            field.checkValidity();
+          };
+          field.addEventListener('input', handleInput);
+        });
+      }
+    }());
+  </script>
 </main>
 </body>
 </html>
