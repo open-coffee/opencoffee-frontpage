@@ -4,6 +4,7 @@ import coffee.synyx.autoconfigure.security.service.CoffeeNetCurrentUserService;
 import coffee.synyx.autoconfigure.security.service.HumanCoffeeNetUser;
 import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
 import coffee.synyx.frontpage.plugin.api.ConfigurationField;
+import coffee.synyx.frontpage.plugin.api.ConfigurationFieldType;
 import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
 import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 import org.junit.Before;
@@ -193,12 +194,12 @@ public class PluginsControllerTest {
         public Optional<ConfigurationDescription> getConfigurationDescription() {
 
             Set<ConfigurationField> fields = new HashSet<>();
-            fields.add(createField("label", "type", "id"));
+            fields.add(createField("label", ConfigurationFieldType.TEXT, "id"));
 
             return Optional.of(() -> fields);
         }
 
-        private ConfigurationField createField(final String label, final String type, final String id) {
+        private ConfigurationField createField(final String label, final ConfigurationFieldType type, final String id) {
             return new ConfigurationField() {
                 @Override
                 public String getLabel() {
@@ -206,7 +207,7 @@ public class PluginsControllerTest {
                 }
 
                 @Override
-                public String getType() {
+                public ConfigurationFieldType getType() {
                     return type;
                 }
 

@@ -7,7 +7,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title th:text="#{frontpage.title}"></title>
-  <link rel="stylesheet" href="css/coffeenet-frontpage-style.css"/>
+  <link rel="stylesheet" href="/css/coffeenet-frontpage-style.css"/>
 </head>
 
 <body>
@@ -16,7 +16,7 @@
   <div class="add-plugin-container">
     <div th:each="availablePlugin : ${availablePlugins}" class="add-plugin-container__item">
       <a th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}" th:text=" ${availablePlugin.id}"
-         th:title="#{plugin.add}" class="button--primary puffy"></a>
+         th:title="#{plugin.add}" class="button button--primary puffy"></a>
     </div>
   </div>
 
