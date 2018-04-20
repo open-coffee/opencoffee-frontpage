@@ -21,15 +21,21 @@ import java.util.Optional;
 import java.util.Set;
 
 import static java.util.Arrays.asList;
-import static java.util.Collections.*;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.emptyMap;
+import static java.util.Collections.emptySet;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 
 
@@ -72,10 +78,13 @@ public class PluginsControllerTest {
     @Test
     public void pluginsWhereFound() throws Exception {
 
-        when(pluginService.getAvailablePlugins()).thenReturn(asList(new NumberPlugin(), new TextPlugin()));
+        TextPlugin textPlugin = new TextPlugin();
+        when(pluginService.getAvailablePlugins()).thenReturn(asList(new NumberPlugin(), textPlugin));
 
-        final PluginInstance textPluginInstance = new PluginInstance(new ConfigurationInstanceImpl(emptyMap()), new TextPlugin());
+
+        final PluginInstance textPluginInstance = new PluginInstance("username", new ConfigurationInstanceImpl(emptyMap()), textPlugin.id());
         when(pluginService.getPluginInstancesOf(humanCoffeeNetUser.getUsername())).thenReturn(Collections.singleton(textPluginInstance));
+        when(pluginService.getPlugin(textPluginInstance.getPluginId())).thenReturn(Optional.of(textPlugin));
 
         ResultActions result = perform(get("/"));
         result.andExpect(status().isOk());

@@ -1,22 +1,25 @@
 package coffee.synyx.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
+import org.springframework.data.annotation.Id;
 
 import java.util.Objects;
 import java.util.UUID;
 
 public final class PluginInstance {
 
+    @Id
     private final UUID id;
-    private final FrontpagePlugin plugin;
+    private final String username;
+    private final String pluginId;
     private final ConfigurationInstanceImpl configurationInstance;
 
 
-    PluginInstance(ConfigurationInstanceImpl configurationInstance, FrontpagePlugin plugin) {
+    PluginInstance(String username, ConfigurationInstanceImpl configurationInstance, String pluginId) {
 
         this.id = UUID.randomUUID();
+        this.username = username;
         this.configurationInstance = configurationInstance;
-        this.plugin = plugin;
+        this.pluginId = pluginId;
     }
 
     UUID getId() {
@@ -27,8 +30,12 @@ public final class PluginInstance {
         return configurationInstance;
     }
 
-    public FrontpagePlugin getPlugin() {
-        return plugin;
+    public String getPluginId() {
+        return pluginId;
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     @Override
@@ -49,8 +56,9 @@ public final class PluginInstance {
     public String toString() {
         return "PluginInstance{" +
             "id=" + id +
+            ", username='" + username + '\'' +
+            ", pluginId='" + pluginId + '\'' +
             ", configurationInstance=" + configurationInstance +
-            ", plugin='" + plugin + '\'' +
             '}';
     }
 }
