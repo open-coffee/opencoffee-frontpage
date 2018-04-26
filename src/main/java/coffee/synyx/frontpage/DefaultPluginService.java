@@ -9,15 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.plugin.core.PluginRegistry;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.UUID;
 
 import static java.lang.invoke.MethodHandles.lookup;
 import static java.util.Collections.emptyMap;
-import static java.util.Collections.emptySet;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toSet;
 
@@ -29,24 +27,23 @@ public class DefaultPluginService implements PluginService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(lookup().lookupClass());
 
-    private final ConcurrentHashMap<String, Set<PluginInstance>> pluginsStore = new ConcurrentHashMap<>();
     private final ConcurrentSet<String> ignoredPlugins = new ConcurrentSet<>();
-
     private final PluginRegistry<FrontpagePlugin, FrontpagePluginQualifier> pluginRegistry;
+    private final PluginRepository pluginRepository;
 
     @Autowired
-    public DefaultPluginService(PluginRegistry<FrontpagePlugin, FrontpagePluginQualifier> pluginRegistry) {
+    public DefaultPluginService(PluginRegistry<FrontpagePlugin, FrontpagePluginQualifier> pluginRegistry, PluginRepository pluginRepository) {
 
         this.pluginRegistry = pluginRegistry;
+        this.pluginRepository = pluginRepository;
     }
 
     @Override
     public Set<PluginInstance> getPluginInstancesOf(String username) {
 
-        return pluginsStore.getOrDefault(username, emptySet()).stream()
-            .filter(pluginInstance -> !ignoredPlugins.contains(pluginInstance.getPlugin().id()))
+        return pluginRepository.findAllByUsername(username).stream()
+            .filter(pluginInstance -> !ignoredPlugins.contains(pluginInstance.getPluginId()))
             .collect(toSet());
-
     }
 
     @Override
@@ -60,16 +57,10 @@ public class DefaultPluginService implements PluginService {
         final Optional<FrontpagePlugin> plugin = getPlugin(pluginId);
 
         if (plugin.isPresent()) {
+            PluginInstance pluginInstance = new PluginInstance(username, configurationInstance, plugin.get().id());
+            pluginRepository.save(pluginInstance);
 
-            Set<PluginInstance> usersPlugins = pluginsStore.getOrDefault(username, new HashSet<>());
-            PluginInstance pluginInstance = new PluginInstance(configurationInstance, plugin.get());
-            if (!usersPlugins.contains(pluginInstance)) {
-
-                usersPlugins.add(pluginInstance);
-                pluginsStore.put(username, usersPlugins);
-
-                LOGGER.info("Saved {} with configuration {} for {}", pluginId, configurationInstance, username);
-            }
+            LOGGER.info("Saved {} with configuration {} for {}", pluginId, configurationInstance, username);
         } else {
             LOGGER.warn("Plugin {} does not exists, but {} tries to add it", pluginId, username);
         }
@@ -78,17 +69,8 @@ public class DefaultPluginService implements PluginService {
     @Override
     public void removePluginInstance(String username, String pluginInstanceId) {
 
-        Set<PluginInstance> usersPlugins = pluginsStore.getOrDefault(username, new HashSet<>());
-        if (!usersPlugins.isEmpty()) {
-
-            final Optional<PluginInstance> first = usersPlugins.stream()
-                .filter(pluginInstance -> pluginInstance.getId().toString().equals(pluginInstanceId))
-                .findFirst();
-
-            first.ifPresent(usersPlugins::remove);
-
-            LOGGER.info("Removed {} for {}", pluginInstanceId, username);
-        }
+        pluginRepository.deleteById(UUID.fromString(pluginInstanceId));
+        LOGGER.info("Removed {} for {}", pluginInstanceId, username);
     }
 
     @Override

@@ -7,8 +7,13 @@ import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,7 +21,7 @@ import java.util.Set;
 
 import static coffee.synyx.frontpage.PluginDtoMapper.mapToPluginDto;
 import static coffee.synyx.frontpage.PluginDtoMapper.mapToPluginDtos;
-import static coffee.synyx.frontpage.PluginInstanceDtoMapper.mapToPluginInstanceDtos;
+import static coffee.synyx.frontpage.PluginInstanceDtoMapper.mapToPluginInstanceDto;
 
 
 @Controller
@@ -26,7 +31,8 @@ public class PluginsController {
     private final CoffeeNetCurrentUserService coffeeNetCurrentUserService;
 
     @Autowired
-    public PluginsController(PluginService pluginService, CoffeeNetCurrentUserService coffeeNetCurrentUserService) {
+    public PluginsController(PluginService pluginService,
+                             CoffeeNetCurrentUserService coffeeNetCurrentUserService) {
 
         this.pluginService = pluginService;
         this.coffeeNetCurrentUserService = coffeeNetCurrentUserService;
@@ -36,7 +42,7 @@ public class PluginsController {
     public String getPlugins(Model model) {
 
         final Set<PluginInstance> myPlugins = pluginService.getPluginInstancesOf(getUsername());
-        model.addAttribute("myPlugins", mapToPluginInstanceDtos(myPlugins));
+        model.addAttribute("myPlugins", activateMyPlugins(myPlugins));
 
         final List<FrontpagePlugin> plugins = pluginService.getAvailablePlugins();
         model.addAttribute("availablePlugins", mapToPluginDtos(plugins));
@@ -82,6 +88,18 @@ public class PluginsController {
         pluginService.removePluginInstance(getUsername(), pluginInstanceId);
 
         return "redirect:/";
+    }
+
+    private List<PluginInstanceDto> activateMyPlugins(Set<PluginInstance> myPlugins) {
+
+        List<PluginInstanceDto> pluginInstanceDtos = new ArrayList<>();
+
+        for (PluginInstance myPluginInstance : myPlugins) {
+            final Optional<FrontpagePlugin> optionalPlugin = pluginService.getPlugin(myPluginInstance.getPluginId());
+            optionalPlugin.ifPresent(plugin -> pluginInstanceDtos.add(mapToPluginInstanceDto(myPluginInstance, plugin)));
+        }
+
+        return pluginInstanceDtos;
     }
 
     private String getUsername() {

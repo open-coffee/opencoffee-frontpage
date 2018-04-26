@@ -8,3 +8,7 @@ coffeenet:
   logging:
     console:
       enabled: true
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27018/frontpage

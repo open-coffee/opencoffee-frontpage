@@ -13,7 +13,10 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class PluginValidatorTest {
