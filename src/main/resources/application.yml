@@ -13,4 +13,6 @@ spring:
     mongodb:
       host: localhost
       port: 27018
-      database:  frontpage
+      username: frontpage
+      password: frontpage
+      database: admin

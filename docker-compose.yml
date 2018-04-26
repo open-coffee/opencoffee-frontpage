@@ -4,8 +4,11 @@ services:
     image: mongo:latest
     ports:
       - '27018:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: frontpage
+      MONGO_INITDB_ROOT_PASSWORD: frontpage
     healthcheck:
-      test: echo 'db.stats().ok'
+      test: echo 'db.stats().ok' | mongo localhost:27018/admin --quiet
       interval: 3s
       timeout: 3s
       retries: 10
