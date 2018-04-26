@@ -11,4 +11,6 @@ coffeenet:
 spring:
   data:
     mongodb:
-      uri: mongodb://localhost:27018/frontpage
+      host: localhost
+      port: 27018
+      database:  frontpage
