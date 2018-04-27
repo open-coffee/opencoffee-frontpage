@@ -11,7 +11,7 @@
     the personalisable frontpage of the CoffeeNet
 </p>
 
-The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin based mechanism for adding widgets like feeds, clock or [isLieb-comic](https://islieb.de/). You can write your own plugin easily and intregrate with the frontpage.
+The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin based mechanism for adding widgets like feeds, clock or [isLieb-comic](https://islieb.de/). You can write your own plugin and intregrate with the frontpage.
 
 ## Requirements
 
@@ -36,7 +36,7 @@ All plugins from the CoffeeNet team can be found in the [CoffeeNet Organisation]
 
 ## Add Plugin
 
-If you want to use a plugin you can just download the `jar` e.g. from the [Releases](https://github.com/coffeenet/coffeenet-frontpage-plugin-feed/releases) section. The plugin `jar` must be placed in `/plugins`-directory beside the frontpage application:
+If you want to use a plugin you can download the `jar` e.g. from the [Releases](https://github.com/coffeenet/coffeenet-frontpage-plugin-feed/releases) section. The plugin `jar` must be placed in `/plugins`-directory beside the frontpage application:
 
 ```
 frontpage.jar
