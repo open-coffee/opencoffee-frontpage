@@ -15,7 +15,7 @@ public class UrlFieldValidatorTest {
     @Test
     public void ensureSupportsReturnsTrueForConfigTypeUrl() {
 
-        final ConfigurationField urlField = new ConfigurationFieldBuilder()
+        final ConfigurationField urlField = new ConfigurationField.Builder()
             .type(ConfigurationFieldType.URL)
             .build();
 
@@ -28,7 +28,7 @@ public class UrlFieldValidatorTest {
     @Test
     public void ensureSupportsReturnsFalseForConfigTypeNotUrl() {
 
-        final ConfigurationField notUrlField = new ConfigurationFieldBuilder()
+        final ConfigurationField notUrlField = new ConfigurationField.Builder()
             .type(ConfigurationFieldType.NUMBER)
             .build();
 
@@ -41,7 +41,7 @@ public class UrlFieldValidatorTest {
     @Test
     public void ensureSuccessfulValidation() {
 
-        final ConfigurationField field = new ConfigurationFieldBuilder()
+        final ConfigurationField field = new ConfigurationField.Builder()
             .type(ConfigurationFieldType.URL)
             .build();
 
@@ -56,7 +56,7 @@ public class UrlFieldValidatorTest {
     @Test
     public void ensureFailingValidation() {
 
-        final ConfigurationField field = new ConfigurationFieldBuilder()
+        final ConfigurationField field = new ConfigurationField.Builder()
             .id("field.id")
             .type(ConfigurationFieldType.URL)
             .build();
@@ -67,46 +67,5 @@ public class UrlFieldValidatorTest {
         sut.validate("synyx.de", field, errors);
 
         verify(errors).rejectValue("field.id", "plugin.validation.error.url");
-    }
-
-    private static class ConfigurationFieldBuilder {
-
-        private String id;
-        private String label;
-        private ConfigurationFieldType type;
-
-        ConfigurationFieldBuilder id(String id) {
-            this.id = id;
-            return this;
-        }
-
-        ConfigurationFieldBuilder label(String label) {
-            this.label = label;
-            return this;
-        }
-
-        ConfigurationFieldBuilder type(ConfigurationFieldType type) {
-            this.type = type;
-            return this;
-        }
-
-        ConfigurationField build() {
-            return new ConfigurationField() {
-                @Override
-                public String getLabel() {
-                    return id;
-                }
-
-                @Override
-                public ConfigurationFieldType getType() {
-                    return type;
-                }
-
-                @Override
-                public String getId() {
-                    return id;
-                }
-            };
-        }
     }
 }
