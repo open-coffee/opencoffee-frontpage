@@ -17,6 +17,7 @@ The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin bas
 
 * Java 8
 * Docker 17.06.0+
+* Docker Compose 1.20.x
 
 ## Development
 
