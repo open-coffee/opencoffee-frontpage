@@ -4,9 +4,11 @@ import coffee.synyx.autoconfigure.security.service.CoffeeNetCurrentUserService;
 import coffee.synyx.autoconfigure.security.service.CoffeeNetUserDetails;
 import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
 import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
+import coffee.synyx.frontpage.validation.ConfigurationInstanceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.MapBindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import java.util.Set;
 import static coffee.synyx.frontpage.PluginDtoMapper.mapToPluginDto;
 import static coffee.synyx.frontpage.PluginDtoMapper.mapToPluginDtos;
 import static coffee.synyx.frontpage.PluginInstanceDtoMapper.mapToPluginInstanceDto;
+import static java.util.Collections.emptyMap;
 
 
 @Controller
@@ -29,13 +32,16 @@ public class PluginsController {
 
     private final PluginService pluginService;
     private final CoffeeNetCurrentUserService coffeeNetCurrentUserService;
+    private final ConfigurationInstanceValidator configurationInstanceValidator;
 
     @Autowired
     public PluginsController(PluginService pluginService,
-                             CoffeeNetCurrentUserService coffeeNetCurrentUserService) {
+                             CoffeeNetCurrentUserService coffeeNetCurrentUserService,
+                             ConfigurationInstanceValidator configurationInstanceValidator) {
 
         this.pluginService = pluginService;
         this.coffeeNetCurrentUserService = coffeeNetCurrentUserService;
+        this.configurationInstanceValidator = configurationInstanceValidator;
     }
 
     @GetMapping("/")
@@ -62,6 +68,9 @@ public class PluginsController {
 
             if (configDescription.isPresent()) {
 
+                MapBindingResult errors = new MapBindingResult(emptyMap(), plugin.id());
+                model.addAttribute("fields", errors);
+
                 model.addAttribute("configuration", configDescription.get().getConfigurations());
                 model.addAttribute("plugin", mapToPluginDto(plugin));
 
@@ -75,10 +84,33 @@ public class PluginsController {
     }
 
     @PostMapping("/plugins/{pluginId}")
-    public String savePluginInstanceForUser(@PathVariable String pluginId, @RequestParam Map<String, String> params) {
+    public String savePluginInstanceForUser(@PathVariable String pluginId, @RequestParam Map<String, String> params, Model model) {
+        final ConfigurationInstanceImpl configurationInstance = new ConfigurationInstanceImpl(params);
 
-        pluginService.savePluginInstance(getUsername(), pluginId, new ConfigurationInstanceImpl(params));
+        Optional<FrontpagePlugin> pluginOptional = pluginService.getPlugin(pluginId);
+        if (!pluginOptional.isPresent()) {
+            throw new IllegalArgumentException(String.format("plugin {} does not exist.", pluginId));
+        }
 
+        final FrontpagePlugin plugin = pluginOptional.get();
+        Optional<ConfigurationDescription> configurationDescriptionOptional = plugin.getConfigurationDescription();
+
+        if (configurationDescriptionOptional.isPresent()) {
+
+            ConfigurationDescription description = configurationDescriptionOptional.get();
+
+            MapBindingResult errors = new MapBindingResult(params, plugin.id());
+            configurationInstanceValidator.validate(configurationInstance, description, errors);
+
+            if (errors.hasErrors()) {
+                model.addAttribute("fields", errors);
+                model.addAttribute("configuration", description.getConfigurations());
+                model.addAttribute("plugin", mapToPluginDto(plugin));
+                return "plugin-configuration";
+            }
+        }
+
+        pluginService.savePluginInstance(getUsername(), pluginId, configurationInstance);
         return "redirect:/";
     }
 
