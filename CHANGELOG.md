@@ -1,6 +1,10 @@
 # Changelog
 
-## 0.2.0-SNAPSHOT
+## 0.1.1
+
+* Fix
+  * Do not use Snapshot versions for `frontpage-plugin-api`
+
 
 ## 0.1.0
 
