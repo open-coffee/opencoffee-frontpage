@@ -15,4 +15,5 @@ spring:
       port: 27018
       username: frontpage
       password: frontpage
-      database: admin
+      authentication-database: admin
+      database: frontpage
