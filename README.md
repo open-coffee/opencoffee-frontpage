@@ -20,7 +20,7 @@ The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin bas
 
 ## Development
 
-Start application and environment ([https://www.mongodb.com/](MongoDB) is used for persistence)
+Start application and environment ([MongoDB](https://www.mongodb.com/) is used for persistence)
 
 ```
 docker-compose up
