@@ -44,4 +44,8 @@ plugins/
  \-- coffeenet-frontpage-plugin-feed.jar
 ```
 
+## Build your own plugin
+
+An CoffeeNet frontpage plugin have to implement the [API](https://github.com/coffeenet/coffeenet-frontpage-plugin-api). An example is the [clock plugin](https://github.com/coffeenet/coffeenet-frontpage-plugin-clock) with [implementation](https://github.com/coffeenet/coffeenet-frontpage-plugin-clock/blob/master/src/main/java/coffee/synyx/frontpage/plugin/clock/ClockPlugin.java) of the frontpage plugin interface. Little more complex plugin example is the [feed plugin](https://github.com/coffeenet/coffeenet-frontpage-plugin-feed).
+
 
