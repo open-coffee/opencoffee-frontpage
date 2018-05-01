@@ -21,22 +21,22 @@ The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin bas
 
 ## Development
 
-Start application and environment ([MongoDB](https://www.mongodb.com/) is used for persistence)
+Start application and environment ([MongoDB]) is used for persistence)
 
 ```
 docker-compose up
 ./mvnw clean spring-boot:run
 ```
 
-[Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html) are also included for inflight changes.
+[Spring Boot DevTools] are also included for inflight changes.
 
 ### Example Plugin Setup 
 
-All plugins from the CoffeeNet team can be found in the [CoffeeNet Organisation](https://github.com/search?q=topic%3Afrontpage-plugin+org%3Acoffeenet&type=Repositories).
+All plugins from the CoffeeNet team can be found in the [CoffeeNet Organisation].
 
 ## Add Plugin
 
-If you want to use a plugin you can download the `jar` e.g. from the [Releases](https://github.com/coffeenet/coffeenet-frontpage-plugin-feed/releases) section. The plugin `jar` must be placed in `/plugins`-directory beside the frontpage application:
+If you want to use a plugin you can download the `jar` e.g. from the [Releases][feed plugin Releases] section. The plugin `jar` must be placed in `/plugins`-directory beside the frontpage application:
 
 ```
 frontpage.jar
@@ -46,6 +46,16 @@ plugins/
 
 ## Build your own plugin
 
-An CoffeeNet frontpage plugin have to implement the [API](https://github.com/coffeenet/coffeenet-frontpage-plugin-api). An example is the [clock plugin](https://github.com/coffeenet/coffeenet-frontpage-plugin-clock) with [implementation](https://github.com/coffeenet/coffeenet-frontpage-plugin-clock/blob/master/src/main/java/coffee/synyx/frontpage/plugin/clock/ClockPlugin.java) of the frontpage plugin interface. Little more complex plugin example is the [feed plugin](https://github.com/coffeenet/coffeenet-frontpage-plugin-feed).
+An CoffeeNet frontpage plugin have to implement the [API][plugin API]. An example is the [clock plugin] with [implementation][clock plugin implementation] of the frontpage plugin interface. Little more complex plugin example is the [feed plugin].
 
 
+[Spring Boot DevTools]: https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html
+[MongoDB]: https://www.mongodb.com
+
+[CoffeeNet Organisation]: https://github.com/search?q=topic%3Afrontpage-plugin+org%3Acoffeenet&type=Repositories
+
+[plugin API]: https://github.com/coffeenet/coffeenet-frontpage-plugin-api
+[clock plugin]: https://github.com/coffeenet/coffeenet-frontpage-plugin-clock
+[clock plugin implementation]: https://github.com/coffeenet/coffeenet-frontpage-plugin-clock/blob/master/src/main/java/coffee/synyx/frontpage/plugin/clock/ClockPlugin.java
+[feed plugin]: https://github.com/coffeenet/coffeenet-frontpage-plugin-feed
+[feed plugin Releases]: https://github.com/coffeenet/coffeenet-frontpage-plugin-feed/releases
