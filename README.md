@@ -11,7 +11,9 @@
     the personalisable frontpage of the CoffeeNet
 </p>
 
-The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin based mechanism for adding widgets like feeds, clock or [isLieb-comic](https://islieb.de/). You can write your own plugin and intregrate with the frontpage.
+The CoffeeNet Frontpage is a personalisable landingpage, which uses a plugin
+based mechanism for adding widgets like feeds, clock or [isLieb-comic](https://islieb.de/).
+You can write your own plugin and intregrate with the frontpage.
 
 ## Requirements
 
@@ -36,7 +38,9 @@ All plugins from the CoffeeNet team can be found in the [CoffeeNet Organisation]
 
 ## Add Plugin
 
-If you want to use a plugin you can download the `jar` e.g. from the [Releases][feed plugin Releases] section. The plugin `jar` must be placed in `/plugins`-directory beside the frontpage application:
+If you want to use a plugin you can download the `jar` e.g. from the
+[Releases][feed plugin Releases] section. The plugin `jar` must be placed in
+`/plugins`-directory beside the frontpage application:
 
 ```
 frontpage.jar
@@ -46,7 +50,9 @@ plugins/
 
 ## Build your own plugin
 
-An CoffeeNet frontpage plugin have to implement the [API][plugin API]. An example is the [clock plugin] with [implementation][clock plugin implementation] of the frontpage plugin interface. Little more complex plugin example is the [feed plugin].
+An CoffeeNet frontpage plugin have to implement the [API][plugin API]. An
+example is the [clock plugin] with [implementation][clock plugin implementation]
+of the frontpage plugin interface. Little more complex plugin example is the [feed plugin].
 
 
 [Spring Boot DevTools]: https://docs.spring.io/spring-boot/docs/current/reference/html/using-boot-devtools.html
