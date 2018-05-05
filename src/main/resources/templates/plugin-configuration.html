@@ -33,10 +33,17 @@
           class="plugin-configuration__input"
           th:classappend="${fields.hasFieldErrors(field.id)} ? 'invalid' : ''"
         />
-        <span
-          th:text="${fields.hasFieldErrors(field.id) ? #messages.msg(fields.getFieldError(field.id).getCode()) : ''}"
-          class="plugin-configuration__error"
-        />
+        <th:block th:switch="${fields.getFieldErrorCount(field.id)}">
+          <span th:case="0" class="plugin-configuration__error" />
+          <span th:case="1" class="plugin-configuration__error" th:text="${#messages.msg(fields.getFieldError(field.id).getCode())}" />
+          <ul th:case="*" class="plugin-configuration__error list list--unstyled">
+            <li
+              th:each="error : ${fields.getFieldErrors(field.id)}"
+              th:text="${#messages.msg(error.getCode())}"
+              class="list-item"
+            />
+          </ul>
+        </th:block>
         <br />
       </th:block>
     </div>
