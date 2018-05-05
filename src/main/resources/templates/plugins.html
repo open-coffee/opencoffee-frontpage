@@ -1,15 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       lang="en"
-      layout:decorator="coffeenet/_layout">
-
-<head>
-  <title th:text="#{frontpage.title}"></title>
-  <link rel="stylesheet" href="/css/coffeenet-frontpage-style.css"/>
-</head>
+      layout:decorator="layout">
 
 <body>
-<main layout:fragment="coffeenet-main">
+<main layout:fragment="frontpage-main">
 
   <div class="add-plugin-container">
     <div th:each="availablePlugin : ${availablePlugins}" class="add-plugin-container__item">

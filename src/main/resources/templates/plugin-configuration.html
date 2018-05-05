@@ -2,27 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       lang="en"
-      layout:decorator="coffeenet/_layout">
-
-<head>
-  <link rel="stylesheet" href="/css/coffeenet-frontpage-style.css"/>
-</head>
+      layout:decorator="layout">
 
 <body>
-<main layout:fragment="coffeenet-main">
-  <form id="plugin-configuration-form" th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post" class="plugin-configuration invalid">
+<main layout:fragment="frontpage-main">
+  <form id="plugin-configuration-form" th:action="@{/plugins/{id}(id=${plugin.id})}" th:method="post"
+        class="plugin-configuration invalid">
     <div class="plugin-configuration__fields">
       <th:block th:each="field : ${configuration}">
         <label th:for="${field.id}" for="id" th:text="${field.label}" class="plugin-configuration__label"></label>
-        <input th:name="${field.id}" th:type="${field.type}" th:id="${field.id}" id="id" th:attr="required=${field.required ? '' : null}" class="plugin-configuration__input" />
-        <br />
+        <input th:name="${field.id}" th:type="${field.type}" th:id="${field.id}" id="id"
+               th:attr="required=${field.required ? '' : null}" class="plugin-configuration__input"/>
+        <br/>
       </th:block>
     </div>
     <div class="button-toolbar button-toolbar--right">
-      <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button button--primary micro align--right"></button>
+      <button th:text="${plugin.id}" th:title="#{plugin.add}"
+              class="button button--primary micro align--right"></button>
     </div>
   </form>
-  <script defer="defer" src="/js/plugin.configuration.form.js"></script>
 </main>
+
+<th:block layout:fragment="frontpage-scripts">
+  <script defer="defer" th:src="@{/js/plugin.configuration.form.js}"></script>
+</th:block>
+
 </body>
 </html>

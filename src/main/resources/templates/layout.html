@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="coffeenet/_layout">
+<head>
+  <title th:text="#{frontpage.title}"></title>
+  <link rel="stylesheet" th:href="@{/css/coffeenet-frontpage-style.css}"/>
+  <link rel="icon" th:href="@{/favicon.ico}" type="image/x-icon"/>
+</head>
+
+<body>
+<main layout:fragment="coffeenet-main">
+  <main layout:fragment="frontpage-main"></main>
+</main>
+
+<th:block layout:fragment="coffeenet-scripts">
+  <th:block layout:fragment="frontpage-scripts">
+  </th:block>
+</th:block>
+</body>
+</html>
