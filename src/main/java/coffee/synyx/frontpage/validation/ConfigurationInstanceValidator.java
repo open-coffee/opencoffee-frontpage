@@ -26,7 +26,6 @@ public class ConfigurationInstanceValidator {
             final String id = descriptionField.getId();
             final String valueToVerify = instance.get(id);
 
-            // TODO verify if field does not exist but is a required one
             for (ConfigurationFieldValidator validator : this.validators) {
                 if (validator.supports(descriptionField)) {
                     validator.validate(valueToVerify, descriptionField, errors);
