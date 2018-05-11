@@ -7,6 +7,7 @@ import coffee.synyx.frontpage.plugin.api.ConfigurationField;
 import coffee.synyx.frontpage.plugin.api.ConfigurationFieldType;
 import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
 import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
+import coffee.synyx.frontpage.validation.ConfigurationInstanceValidator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,9 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -48,13 +51,15 @@ public class PluginsControllerTest {
     private PluginService pluginService;
     @Mock
     private CoffeeNetCurrentUserService coffeeNetCurrentUserService;
+    @Mock
+    private ConfigurationInstanceValidator configurationInstanceValidator;
 
     private HumanCoffeeNetUser humanCoffeeNetUser;
 
     @Before
     public void setUp() {
 
-        sut = new PluginsController(pluginService, coffeeNetCurrentUserService);
+        sut = new PluginsController(pluginService, coffeeNetCurrentUserService, configurationInstanceValidator);
 
         humanCoffeeNetUser = new HumanCoffeeNetUser("CoffeeNet", "", emptySet());
         when(coffeeNetCurrentUserService.get()).thenReturn(Optional.of(humanCoffeeNetUser));
@@ -95,15 +100,35 @@ public class PluginsControllerTest {
 
 
     @Test
-    public void savePluginInstance() throws Exception {
+    public void ensureSavePluginWhenThereIsNoConfig() throws Exception {
+
+        final FrontpagePlugin plugin = mock(FrontpagePlugin.class);
+        when(plugin.getConfigurationDescription()).thenReturn(Optional.empty());
+        when(pluginService.getPlugin("id")).thenReturn(Optional.of(plugin));
 
         ResultActions result = perform(post("/plugins/id"));
         result.andExpect(status().is3xxRedirection());
         result.andExpect(view().name("redirect:/"));
 
+        verifyZeroInteractions(configurationInstanceValidator);
         verify(pluginService).savePluginInstance(eq(humanCoffeeNetUser.getUsername()), eq("id"), any(ConfigurationInstanceImpl.class));
     }
 
+    @Test
+    public void ensureSavePluginWhenConfigIsValid() throws Exception {
+
+        final ConfigurationDescription configDescr = mock(ConfigurationDescription.class);
+        final FrontpagePlugin plugin = mock(FrontpagePlugin.class);
+        when(plugin.getConfigurationDescription()).thenReturn(Optional.of(configDescr));
+        when(pluginService.getPlugin("id")).thenReturn(Optional.of(plugin));
+
+        ResultActions result = perform(post("/plugins/id"));
+        result.andExpect(status().is3xxRedirection());
+        result.andExpect(view().name("redirect:/"));
+
+        verify(configurationInstanceValidator).validate(any(), eq(configDescr), any());
+        verify(pluginService).savePluginInstance(eq(humanCoffeeNetUser.getUsername()), eq("id"), any(ConfigurationInstanceImpl.class));
+    }
 
     @Test
     public void removePluginInstance() throws Exception {
