@@ -18,7 +18,8 @@
           myPluginContent
         </div>
 
-        <form th:id="plugin-remove- + ${myPlugin.uuid}" th:action="@{/plugins/{id}(id=${myPlugin.uuid})}"
+        <form th:id="plugin-remove- + ${myPlugin.uuid}"
+              th:action="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}"
               th:method="delete">
           <span class="plugin-grid__cell__close"
                 th:onclick="'document.getElementById(\'plugin-remove-' + ${myPlugin.uuid} + '\').submit();'"

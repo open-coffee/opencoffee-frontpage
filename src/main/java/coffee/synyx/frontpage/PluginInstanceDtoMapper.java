@@ -12,6 +12,11 @@ class PluginInstanceDtoMapper {
 
         final ConfigurationInstanceImpl configurationInstance = pluginInstance.getConfigurationInstance();
 
-        return new PluginInstanceDto(pluginInstance.getId().toString(), plugin.title(configurationInstance), plugin.content(configurationInstance));
+        return new PluginInstanceDto(
+            pluginInstance.getId().toString(),
+            plugin.title(configurationInstance),
+            plugin.content(configurationInstance),
+            plugin.id()
+        );
     }
 }

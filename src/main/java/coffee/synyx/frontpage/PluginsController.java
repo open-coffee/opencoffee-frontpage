@@ -121,8 +121,8 @@ public class PluginsController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/plugins/{pluginInstanceId}")
-    public String removePluginForUser(@PathVariable String pluginInstanceId) {
+    @DeleteMapping("/plugins/{pluginId}/instances/{pluginInstanceId}")
+    public String removePluginInstanceOfUser(@PathVariable String pluginInstanceId) {
 
         pluginService.removePluginInstance(getUsername(), pluginInstanceId);
 

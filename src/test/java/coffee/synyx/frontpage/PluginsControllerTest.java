@@ -124,14 +124,14 @@ public class PluginsControllerTest {
 
         final FrontpagePlugin plugin = mock(FrontpagePlugin.class);
         when(plugin.getConfigurationDescription()).thenReturn(Optional.empty());
-        when(pluginService.getPlugin("id")).thenReturn(Optional.of(plugin));
+        when(pluginService.getPlugin("pluginId")).thenReturn(Optional.of(plugin));
 
-        ResultActions result = perform(post("/plugins/id"));
+        ResultActions result = perform(post("/plugins/pluginId"));
         result.andExpect(status().is3xxRedirection());
         result.andExpect(view().name("redirect:/"));
 
         verifyZeroInteractions(configurationInstanceValidator);
-        verify(pluginService).savePluginInstance(eq(humanCoffeeNetUser.getUsername()), eq("id"), any(ConfigurationInstanceImpl.class));
+        verify(pluginService).savePluginInstance(eq(humanCoffeeNetUser.getUsername()), eq("pluginId"), any(ConfigurationInstanceImpl.class));
     }
 
     @Test
@@ -140,32 +140,32 @@ public class PluginsControllerTest {
         final ConfigurationDescription configDescr = mock(ConfigurationDescription.class);
         final FrontpagePlugin plugin = mock(FrontpagePlugin.class);
         when(plugin.getConfigurationDescription()).thenReturn(Optional.of(configDescr));
-        when(pluginService.getPlugin("id")).thenReturn(Optional.of(plugin));
+        when(pluginService.getPlugin("pluginId")).thenReturn(Optional.of(plugin));
 
-        ResultActions result = perform(post("/plugins/id"));
+        ResultActions result = perform(post("/plugins/pluginId"));
         result.andExpect(status().is3xxRedirection());
         result.andExpect(view().name("redirect:/"));
 
         verify(configurationInstanceValidator).validate(any(), eq(configDescr), any());
-        verify(pluginService).savePluginInstance(eq(humanCoffeeNetUser.getUsername()), eq("id"), any(ConfigurationInstanceImpl.class));
+        verify(pluginService).savePluginInstance(eq(humanCoffeeNetUser.getUsername()), eq("pluginId"), any(ConfigurationInstanceImpl.class));
     }
 
     @Test
     public void removePluginInstance() throws Exception {
 
-        ResultActions result = perform(delete("/plugins/id"));
+        ResultActions result = perform(delete("/plugins/pluginId/instances/pluginInstanceId"));
         result.andExpect(status().is3xxRedirection());
         result.andExpect(view().name("redirect:/"));
 
-        verify(pluginService).removePluginInstance(humanCoffeeNetUser.getUsername(), "id");
+        verify(pluginService).removePluginInstance(humanCoffeeNetUser.getUsername(), "pluginInstanceId");
     }
 
     @Test
     public void pluginIsNotAvailable() throws Exception {
 
-        when(pluginService.getPlugin("id")).thenReturn(Optional.empty());
+        when(pluginService.getPlugin("pluginId")).thenReturn(Optional.empty());
 
-        ResultActions result = perform(get("/plugins/id?configuration=true"));
+        ResultActions result = perform(get("/plugins/pluginId?configuration=true"));
         result.andExpect(status().is3xxRedirection());
         result.andExpect(view().name("redirect:/"));
     }
@@ -173,22 +173,22 @@ public class PluginsControllerTest {
     @Test
     public void configurationIsNotAvailable() throws Exception {
 
-        when(pluginService.getPlugin("id")).thenReturn(Optional.of(new NumberPlugin()));
+        when(pluginService.getPlugin("pluginId")).thenReturn(Optional.of(new NumberPlugin()));
 
-        ResultActions result = perform(get("/plugins/id?configuration=true"));
+        ResultActions result = perform(get("/plugins/pluginId?configuration=true"));
         result.andExpect(status().is3xxRedirection());
         result.andExpect(view().name("redirect:/"));
 
-        verify(pluginService).savePluginInstance("CoffeeNet", "id");
+        verify(pluginService).savePluginInstance("CoffeeNet", "pluginId");
     }
 
 
     @Test
     public void returnPluginConfiguration() throws Exception {
 
-        when(pluginService.getPlugin("id")).thenReturn(Optional.of(new TextPlugin()));
+        when(pluginService.getPlugin("pluginId")).thenReturn(Optional.of(new TextPlugin()));
 
-        ResultActions result = perform(get("/plugins/id?configuration=true"));
+        ResultActions result = perform(get("/plugins/pluginId?configuration=true"));
         result.andExpect(status().is2xxSuccessful());
         result.andExpect(view().name("plugin-configuration"));
         result.andExpect(model().attribute("configuration", hasSize(1)));
@@ -248,7 +248,7 @@ public class PluginsControllerTest {
         public Optional<ConfigurationDescription> getConfigurationDescription() {
 
             Set<ConfigurationField> fields = new HashSet<>();
-            fields.add(createField("label", ConfigurationFieldType.TEXT, "id"));
+            fields.add(createField("label", ConfigurationFieldType.TEXT, "pluginId"));
 
             return Optional.of(() -> fields);
         }
