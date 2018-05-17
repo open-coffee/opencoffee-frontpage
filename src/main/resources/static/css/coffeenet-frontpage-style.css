@@ -48,8 +48,8 @@
 
 .plugin-grid__cell__close {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 15px;
   cursor: pointer;
 }
 
