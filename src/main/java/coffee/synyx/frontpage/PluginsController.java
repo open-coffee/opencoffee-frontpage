@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class PluginsController {
     }
 
     @GetMapping(value = "/plugins/{pluginId}", params = "configuration")
-    public String showPluginConfiguration(@PathVariable String pluginId, Model model) {
+    public String showPluginInstanceConfiguration(@PathVariable String pluginId, Model model) {
 
         final Optional<FrontpagePlugin> pluginOptional = pluginService.getPlugin(pluginId);
 
@@ -91,33 +92,52 @@ public class PluginsController {
     }
 
     @PostMapping("/plugins/{pluginId}")
-    public String savePluginInstanceForUser(@PathVariable String pluginId, @RequestParam Map<String, String> params, Model model) {
-        final ConfigurationInstanceImpl configurationInstance = new ConfigurationInstanceImpl(params);
+    public String createPluginInstanceForUser(@PathVariable String pluginId, @RequestParam Map<String, String> params, Model model) {
 
-        Optional<FrontpagePlugin> pluginOptional = pluginService.getPlugin(pluginId);
-        if (!pluginOptional.isPresent()) {
-            throw new IllegalArgumentException(format("plugin %s does not exist.", pluginId));
-        }
-
-        final FrontpagePlugin plugin = pluginOptional.get();
-        Optional<ConfigurationDescription> configurationDescriptionOptional = plugin.getConfigurationDescription();
+        final FrontpagePlugin plugin = getPlugin(pluginId);
+        final Optional<ConfigurationDescription> configurationDescriptionOptional = plugin.getConfigurationDescription();
 
         if (configurationDescriptionOptional.isPresent()) {
 
             ConfigurationDescription description = configurationDescriptionOptional.get();
-
-            MapBindingResult errors = new MapBindingResult(params, plugin.id());
-            configurationInstanceValidator.validate(configurationInstance, description, errors);
+            MapBindingResult errors = validateFieldValues(params, plugin, description);
 
             if (errors.hasErrors()) {
                 model.addAttribute("fields", errors);
                 model.addAttribute("configuration", description.getConfigurations());
+                model.addAttribute("configurationInstance", new ConfigurationInstanceImpl(params));
                 model.addAttribute("plugin", mapToPluginDto(plugin));
+
                 return "plugin-configuration";
             }
         }
 
-        pluginService.savePluginInstance(getUsername(), pluginId, configurationInstance);
+        pluginService.savePluginInstance(getUsername(), pluginId, new ConfigurationInstanceImpl(params));
+        return "redirect:/";
+    }
+
+    @PutMapping("/plugins/{pluginId}/instances/{pluginInstanceId}")
+    public String updatePluginInstanceForUser(@PathVariable String pluginId, @PathVariable String pluginInstanceId, @RequestParam Map<String, String> params, Model model) {
+
+        final FrontpagePlugin plugin = getPlugin(pluginId);
+        final Optional<ConfigurationDescription> configurationDescriptionOptional = plugin.getConfigurationDescription();
+
+        if (configurationDescriptionOptional.isPresent()) {
+            ConfigurationDescription description = configurationDescriptionOptional.get();
+            MapBindingResult errors = validateFieldValues(params, plugin, description);
+
+            if (errors.hasErrors()) {
+                model.addAttribute("fields", errors);
+                model.addAttribute("configuration", description.getConfigurations());
+                model.addAttribute("configurationInstance", new ConfigurationInstanceImpl(params));
+                model.addAttribute("plugin", mapToPluginDto(plugin));
+                model.addAttribute("pluginInstanceId", pluginInstanceId);
+
+                return "plugin-configuration";
+            }
+        }
+
+        pluginService.updatePluginInstance(pluginInstanceId, new ConfigurationInstanceImpl(params));
         return "redirect:/";
     }
 
@@ -127,6 +147,49 @@ public class PluginsController {
         pluginService.removePluginInstance(getUsername(), pluginInstanceId);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/plugins/{pluginId}/instances/{pluginInstanceId}")
+    public String editPluginInstanceConfiguration(@PathVariable String pluginId, @PathVariable String pluginInstanceId, Model model) {
+
+        final Optional<FrontpagePlugin> pluginOptional = pluginService.getPlugin(pluginId);
+        final Optional<PluginInstance> pluginInstanceOptional = pluginService.getPluginInstance(pluginInstanceId);
+
+        if (pluginOptional.isPresent() && pluginInstanceOptional.isPresent()) {
+
+            final FrontpagePlugin plugin = pluginOptional.get();
+            final Optional<ConfigurationDescription> configDescription = plugin.getConfigurationDescription();
+
+            if (configDescription.isPresent()) {
+
+                MapBindingResult errors = new MapBindingResult(emptyMap(), plugin.id());
+                model.addAttribute("fields", errors);
+
+                model.addAttribute("configuration", configDescription.get().getConfigurations());
+                model.addAttribute("configurationInstance", pluginInstanceOptional.get().getConfigurationInstance());
+                model.addAttribute("plugin", mapToPluginDto(plugin));
+
+                return "plugin-configuration";
+            }
+        }
+
+        return "redirect:/";
+    }
+
+    private MapBindingResult validateFieldValues(@RequestParam Map<String, String> params, FrontpagePlugin plugin, ConfigurationDescription description) {
+
+        MapBindingResult errors = new MapBindingResult(params, plugin.id());
+        configurationInstanceValidator.validate(new ConfigurationInstanceImpl(params), description, errors);
+        return errors;
+    }
+
+    private FrontpagePlugin getPlugin(@PathVariable String pluginId) {
+
+        Optional<FrontpagePlugin> pluginOptional = pluginService.getPlugin(pluginId);
+        if (!pluginOptional.isPresent()) {
+            throw new IllegalArgumentException(format("plugin %s does not exist.", pluginId));
+        }
+        return pluginOptional.get();
     }
 
     private List<PluginInstanceDto> activateMyPlugins(Set<PluginInstance> myPlugins) {

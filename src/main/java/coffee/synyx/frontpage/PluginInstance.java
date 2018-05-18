@@ -1,10 +1,13 @@
 package coffee.synyx.frontpage;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.PersistenceConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 import java.util.UUID;
 
+@Document
 public final class PluginInstance {
 
     @Id
@@ -13,6 +16,14 @@ public final class PluginInstance {
     private final String pluginId;
     private final ConfigurationInstanceImpl configurationInstance;
 
+    @PersistenceConstructor
+    PluginInstance(UUID id, String username, ConfigurationInstanceImpl configurationInstance, String pluginId) {
+
+        this.id = id;
+        this.username = username;
+        this.configurationInstance = configurationInstance;
+        this.pluginId = pluginId;
+    }
 
     PluginInstance(String username, ConfigurationInstanceImpl configurationInstance, String pluginId) {
 

@@ -13,7 +13,9 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.plugin.core.PluginRegistry;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -24,6 +26,8 @@ import static java.util.Arrays.asList;
 import static java.util.Collections.emptyMap;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -46,6 +50,30 @@ public class DefaultPluginServiceTest {
 
 
     @Test
+    public void getPluginsInstances() {
+
+        final UUID uuid = UUID.fromString("123e4567-e89b-12d3-a456-556642440000");
+        final PluginInstance pluginInstance = new PluginInstance(uuid, "derTobsch", new ConfigurationInstanceImpl(emptyMap()), "pluginId");
+        when(pluginRepository.findById(uuid)).thenReturn(pluginInstance);
+
+        final Optional<PluginInstance> plugins = sut.getPluginInstance("123e4567-e89b-12d3-a456-556642440000");
+
+        assertThat(plugins).isEqualTo(Optional.of(pluginInstance));
+    }
+
+
+    @Test
+    public void userDoesNotHaveAnyPluginsInstances() {
+
+        when(pluginRepository.findById(UUID.fromString("123e4567-e89b-12d3-a456-556642440000"))).thenReturn(null);
+
+        final Optional<PluginInstance> plugins = sut.getPluginInstance("123e4567-e89b-12d3-a456-556642440000");
+
+        assertThat(plugins.isPresent()).isFalse();
+    }
+
+
+    @Test
     public void userDoesNotHaveAnyPlugins() {
 
         when(pluginRegistry.getPlugins()).thenReturn(singletonList(new TextPlugin()));
@@ -53,6 +81,41 @@ public class DefaultPluginServiceTest {
         final Set<PluginInstance> plugins = sut.getPluginInstancesOf("username");
 
         assertThat(plugins).isEmpty();
+    }
+
+
+    @Test
+    public void updatePluginInstance() {
+
+        final UUID uuid = UUID.fromString("123e4567-e89b-12d3-a456-556642440000");
+        final PluginInstance pluginInstance = new PluginInstance(uuid, "derTobsch", new ConfigurationInstanceImpl(emptyMap()), "pluginId");
+        when(pluginRepository.findById(uuid)).thenReturn(pluginInstance);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("thisKey", "withThatValue");
+        sut.updatePluginInstance("123e4567-e89b-12d3-a456-556642440000", new ConfigurationInstanceImpl(params));
+
+        ArgumentCaptor<PluginInstance> captor = ArgumentCaptor.forClass(PluginInstance.class);
+        verify(pluginRepository).save(captor.capture());
+
+        final PluginInstance instance = captor.getValue();
+        assertThat(instance.getId()).isEqualTo(UUID.fromString("123e4567-e89b-12d3-a456-556642440000"));
+        assertThat(instance.getUsername()).isEqualTo("derTobsch");
+        assertThat(instance.getPluginId()).isEqualTo("pluginId");
+        assertThat(instance.getConfigurationInstance().get("thisKey")).isEqualTo("withThatValue");
+    }
+
+
+    @Test
+    public void updatePluginInstanceButNoInstanceForUserAvailable() {
+
+        when(pluginRepository.findById(UUID.fromString("123e4567-e89b-12d3-a456-556642440000"))).thenReturn(null);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("thisKey", "withThatValue");
+        sut.updatePluginInstance("123e4567-e89b-12d3-a456-556642440000", new ConfigurationInstanceImpl(params));
+
+        verify(pluginRepository, never()).save(any(PluginInstance.class));
     }
 
 
@@ -72,6 +135,7 @@ public class DefaultPluginServiceTest {
         assertThat(pluginInstance.getPluginId()).isEqualTo("Text");
         assertThat(pluginInstance.getUsername()).isEqualTo("username");
     }
+
 
     @Test
     public void userRemovesAPlugin() {

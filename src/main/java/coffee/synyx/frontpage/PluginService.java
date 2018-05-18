@@ -12,6 +12,15 @@ import java.util.Set;
 public interface PluginService {
 
     /**
+     * Returns the plugin instance with the given id
+     *
+     * @param pluginInstanceId of the {@link PluginInstance}
+     * @return optional of {@link PluginInstance}
+     */
+    Optional<PluginInstance> getPluginInstance(String pluginInstanceId);
+
+
+    /**
      * Returns a list of frontpage plugin instances for the given user
      *
      * @param username to filter the plugins
@@ -37,6 +46,9 @@ public interface PluginService {
      * @param configurationInstance to configure the plugin
      */
     void savePluginInstance(String username, String pluginId, ConfigurationInstanceImpl configurationInstance);
+
+
+    void updatePluginInstance(String pluginInstanceId, ConfigurationInstanceImpl configurationInstance);
 
 
     /**
