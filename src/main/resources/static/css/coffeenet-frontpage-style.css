@@ -178,3 +178,18 @@ a.button:visited {
   content: '';
   margin-left: auto;
 }
+
+.frontpage--container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.frontpage--plugin-container {
+  flex: 1;
+}
+
+.frontpage--footer-bar {
+  margin: 0 20%;
+  vertical-align: bottom;
+}
