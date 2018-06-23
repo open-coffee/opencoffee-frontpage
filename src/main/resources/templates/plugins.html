@@ -4,7 +4,7 @@
       layout:decorator="layout">
 
 <body>
-<main layout:fragment="frontpage-main">
+<th:block layout:fragment="frontpage-main">
 
   <div class="add-plugin-container">
     <div th:each="availablePlugin : ${availablePlugins}" class="add-plugin-container__item">
@@ -35,6 +35,6 @@
     </th:block>
   </div>
 
-</main>
+</th:block>
 </body>
 </html>
