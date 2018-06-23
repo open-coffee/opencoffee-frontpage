@@ -4,47 +4,38 @@
       layout:decorator="layout">
 
 <body>
-<th:block layout:fragment="frontpage-main">
+<section layout:fragment="frontpage-main" class="frontpage--plugin-container">
 
-  <div class="frontpage--container">
+  <div class="plugin-grid">
+    <th:block th:each="myPlugin : ${myPlugins}">
+      <div class="plugin-grid__cell plugin-grid__cell_added">
+        <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(myPlugin.title)}"
+            th:text="${myPlugin.title}">
+          myPluginTitle
+        </h2>
 
-    <div class="add-plugin-container">
-      <div th:each="availablePlugin : ${availablePlugins}" class="add-plugin-container__item">
-        <a th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}" th:text=" ${availablePlugin.id}"
-           th:title="#{plugin.add}" class="button button--primary puffy"></a>
-      </div>
-    </div>
+        <div class="plugin-grid__cell__content" th:utext="${myPlugin.content}">
+          myPluginContent
+        </div>
 
-    <section class="frontpage--plugin-container">
-      <div class="plugin-grid">
-        <th:block th:each="myPlugin : ${myPlugins}">
-          <div class="plugin-grid__cell">
-            <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(myPlugin.title)}"
-                th:text="${myPlugin.title}">
-              myPluginTitle
-            </h2>
-
-            <div class="plugin-grid__cell__content" th:utext="${myPlugin.content}">
-              myPluginContent
-            </div>
-
-            <form th:id="plugin-remove- + ${myPlugin.uuid}" th:action="@{/plugins/{id}(id=${myPlugin.uuid})}"
-                  th:method="delete">
+        <form th:id="plugin-remove- + ${myPlugin.uuid}" th:action="@{/plugins/{id}(id=${myPlugin.uuid})}"
+              th:method="delete">
           <span class="plugin-grid__cell__close"
                 th:onclick="'document.getElementById(\'plugin-remove-' + ${myPlugin.uuid} + '\').submit();'"
-                th:title="#{plugin.remove}"></span>
-            </form>
-          </div>
-        </th:block>
+                th:title="#{plugin.remove}">
+          </span>
+        </form>
       </div>
-    </section>
+    </th:block>
 
-    <footer class="frontpage--footer-container">
-      <img class="frontpage--footer-bar" th:src="@{/img/element_bar.svg}" src="../static/img/element_bar.svg"/>
-    </footer>
+    <a th:href="@{/add}" class="frontpage--link">
+      <div class="plugin-grid__cell plugin-grid__cell_add" title="Add new plugin">
+        <span>&#43;</span>
+      </div>
+    </a>
 
   </div>
+</section>
 
-</th:block>
 </body>
 </html>

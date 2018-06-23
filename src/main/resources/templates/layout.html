@@ -8,7 +8,14 @@
 
 <body>
 <main layout:fragment="coffeenet-main">
-  <main layout:fragment="frontpage-main"></main>
+    <div class="frontpage--container">
+
+      <div layout:fragment="frontpage-main"></div>
+
+      <footer>
+        <img class="frontpage--footer-bar" th:src="@{/img/element_bar.svg}" src="../static/img/element_bar.svg" alt="CoffeeNet Counter"/>
+      </footer>
+    </div>
 </main>
 
 <th:block layout:fragment="coffeenet-scripts">

@@ -50,10 +50,16 @@ public class PluginsController {
         final Set<PluginInstance> myPlugins = pluginService.getPluginInstancesOf(getUsername());
         model.addAttribute("myPlugins", activateMyPlugins(myPlugins));
 
+        return "plugins";
+    }
+
+    @GetMapping("/add")
+    public String addPluginPage(Model model) {
+
         final List<FrontpagePlugin> plugins = pluginService.getAvailablePlugins();
         model.addAttribute("availablePlugins", mapToPluginDtos(plugins));
 
-        return "plugins";
+        return "plugins-add";
     }
 
     @GetMapping(value = "/plugins/{pluginId}", params = "configuration")
