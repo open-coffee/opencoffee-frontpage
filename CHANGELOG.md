@@ -1,6 +1,16 @@
 # Changelog
 
-## 0.2.0-SNAPSHOT
+## 0.2.0
+
+* Upgrade
+  * CoffeeNet Starter Parent to 0.31.0
+  * Frontpage-Plugin-Api to 0.6.0
+
+* Add
+  * Configuration Validation
+
+* Fix
+  * Overlapping scroll and close area
 
 ## 0.1.1
 
