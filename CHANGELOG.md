@@ -2,6 +2,9 @@
 
 ## 0.3.0-SNAPSHOT
 
+* Add
+  * new design with counter
+
 ## 0.2.0
 
 * Upgrade
