@@ -24,6 +24,7 @@ import java.util.Set;
 import static coffee.synyx.frontpage.PluginDtoMapper.mapToPluginDto;
 import static coffee.synyx.frontpage.PluginDtoMapper.mapToPluginDtos;
 import static coffee.synyx.frontpage.PluginInstanceDtoMapper.mapToPluginInstanceDto;
+import static java.lang.String.format;
 import static java.util.Collections.emptyMap;
 
 
@@ -95,7 +96,7 @@ public class PluginsController {
 
         Optional<FrontpagePlugin> pluginOptional = pluginService.getPlugin(pluginId);
         if (!pluginOptional.isPresent()) {
-            throw new IllegalArgumentException(String.format("plugin {} does not exist.", pluginId));
+            throw new IllegalArgumentException(format("plugin %s does not exist.", pluginId));
         }
 
         final FrontpagePlugin plugin = pluginOptional.get();
