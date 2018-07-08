@@ -65,18 +65,40 @@ public class PluginsControllerTest {
         when(coffeeNetCurrentUserService.get()).thenReturn(Optional.of(humanCoffeeNetUser));
     }
 
+    @Test
+    public void addNewPlugin() throws Exception {
+
+        TextPlugin textPlugin = new TextPlugin();
+        when(pluginService.getAvailablePlugins()).thenReturn(asList(new NumberPlugin(), textPlugin));
+
+        ResultActions result = perform(get("/add"));
+        result.andExpect(status().isOk());
+        result.andExpect(view().name("plugins-add"));
+        result.andExpect(model().attribute("availablePlugins", hasSize(2)));
+    }
+
+
+    @Test
+    public void returnsEmptyListWhenNoAvailablePluginWasFound() throws Exception {
+
+        when(pluginService.getAvailablePlugins()).thenReturn(emptyList());
+
+        ResultActions result = perform(get("/add"));
+        result.andExpect(status().isOk());
+        result.andExpect(view().name("plugins-add"));
+        result.andExpect(model().attribute("availablePlugins", emptyList()));
+    }
+
 
     @Test
     public void returnsEmptyListWhenNoPluginWasFound() throws Exception {
 
-        when(pluginService.getAvailablePlugins()).thenReturn(emptyList());
         when(pluginService.getPluginInstancesOf(humanCoffeeNetUser.getUsername())).thenReturn(emptySet());
 
         ResultActions result = perform(get("/"));
         result.andExpect(status().isOk());
         result.andExpect(view().name("plugins"));
         result.andExpect(model().attribute("myPlugins", emptyList()));
-        result.andExpect(model().attribute("availablePlugins", emptyList()));
     }
 
 
@@ -86,7 +108,6 @@ public class PluginsControllerTest {
         TextPlugin textPlugin = new TextPlugin();
         when(pluginService.getAvailablePlugins()).thenReturn(asList(new NumberPlugin(), textPlugin));
 
-
         final PluginInstance textPluginInstance = new PluginInstance("username", new ConfigurationInstanceImpl(emptyMap()), textPlugin.id());
         when(pluginService.getPluginInstancesOf(humanCoffeeNetUser.getUsername())).thenReturn(Collections.singleton(textPluginInstance));
         when(pluginService.getPlugin(textPluginInstance.getPluginId())).thenReturn(Optional.of(textPlugin));
@@ -95,7 +116,6 @@ public class PluginsControllerTest {
         result.andExpect(status().isOk());
         result.andExpect(view().name("plugins"));
         result.andExpect(model().attribute("myPlugins", hasSize(1)));
-        result.andExpect(model().attribute("availablePlugins", hasSize(2)));
     }
 
 

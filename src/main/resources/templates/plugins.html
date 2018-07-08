@@ -4,18 +4,11 @@
       layout:decorator="layout">
 
 <body>
-<main layout:fragment="frontpage-main">
-
-  <div class="add-plugin-container">
-    <div th:each="availablePlugin : ${availablePlugins}" class="add-plugin-container__item">
-      <a th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}" th:text=" ${availablePlugin.id}"
-         th:title="#{plugin.add}" class="button button--primary puffy"></a>
-    </div>
-  </div>
+<section layout:fragment="frontpage-main" class="frontpage--plugin-container">
 
   <div class="plugin-grid">
     <th:block th:each="myPlugin : ${myPlugins}">
-      <div class="plugin-grid__cell">
+      <div class="plugin-grid__cell plugin-grid__cell_added">
         <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(myPlugin.title)}"
             th:text="${myPlugin.title}">
           myPluginTitle
@@ -29,12 +22,20 @@
               th:method="delete">
           <span class="plugin-grid__cell__close"
                 th:onclick="'document.getElementById(\'plugin-remove-' + ${myPlugin.uuid} + '\').submit();'"
-                th:title="#{plugin.remove}"></span>
+                th:title="#{plugin.remove}">
+          </span>
         </form>
       </div>
     </th:block>
-  </div>
 
-</main>
+    <a th:href="@{/add}" class="frontpage--link">
+      <div class="plugin-grid__cell plugin-grid__cell_add" title="Add new plugin">
+        <span>&#43;</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
 </body>
 </html>
