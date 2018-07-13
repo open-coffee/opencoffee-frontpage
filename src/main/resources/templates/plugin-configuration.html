@@ -6,45 +6,48 @@
 
 <body>
 
-<section layout:fragment="frontpage-main" class="frontpage--plugin-configuration-container">
+<th:block layout:fragment="frontpage-main">
 
   <a class="frontpage--back-button" th:href="@{/add}" title="Back to plugin configuration">
     &#8592;
   </a>
 
-  <form
-    id="plugin-configuration-form"
-    th:action="@{/plugins/{id}(id=${plugin.id})}"
-    th:method="post"
-    class="plugin-configuration"
-    th:classappend="${fields.hasErrors() ? 'invalid' : ''}"
-  >
-    <div class="plugin-configuration__fields">
-      <th:block th:each="field : ${configuration}">
-        <label th:for="${field.id}" for="id" th:text="${field.label}" class="plugin-configuration__label"></label>
-        <input
-          th:name="${field.id}"
-          th:type="${field.type}"
-          th:id="${field.id}"
-          th:value="${fields.getFieldValue(field.id)}"
-          id="id"
-          th:attr="required=${field.required ? '' : null}"
-          class="plugin-configuration__input"
-          th:classappend="${fields.hasFieldErrors(field.id)} ? 'invalid' : ''"
-        />
-        <span
-          th:text="${fields.hasFieldErrors(field.id) ? #messages.msg(fields.getFieldError(field.id).getCode()) : ''}"
-          class="plugin-configuration__error"
-        />
-      </th:block>
-    </div>
-    <div class="button-toolbar button-toolbar--right">
-      <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button button--primary micro align--right">
-        pluginId
-      </button>
-    </div>
-  </form>
-</section>
+  <section class="frontpage--plugin-configuration-container">
+
+    <form
+      id="plugin-configuration-form"
+      th:action="@{/plugins/{id}(id=${plugin.id})}"
+      th:method="post"
+      class="plugin-configuration"
+      th:classappend="${fields.hasErrors() ? 'invalid' : ''}"
+    >
+      <div class="plugin-configuration__fields">
+        <th:block th:each="field : ${configuration}">
+          <label th:for="${field.id}" for="id" th:text="${field.label}" class="plugin-configuration__label"></label>
+          <input
+            th:name="${field.id}"
+            th:type="${field.type}"
+            th:id="${field.id}"
+            th:value="${fields.getFieldValue(field.id)}"
+            id="id"
+            th:attr="required=${field.required ? '' : null}"
+            class="plugin-configuration__input"
+            th:classappend="${fields.hasFieldErrors(field.id)} ? 'invalid' : ''"
+          />
+          <span
+            th:text="${fields.hasFieldErrors(field.id) ? #messages.msg(fields.getFieldError(field.id).getCode()) : ''}"
+            class="plugin-configuration__error"
+          />
+        </th:block>
+      </div>
+      <div class="button-toolbar button-toolbar--right">
+        <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button button--primary micro align--right">
+          pluginId
+        </button>
+      </div>
+    </form>
+  </section>
+</th:block>
 
 <th:block layout:fragment="frontpage-scripts">
   <script th:src="@{/js/plugin.configuration.form.js}"></script>

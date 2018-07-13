@@ -4,27 +4,31 @@
       layout:decorator="layout">
 
 <body>
-<section layout:fragment="frontpage-main" class="frontpage--plugin-container">
+
+<th:block layout:fragment="frontpage-main">
 
   <a class="frontpage--back-button" th:href="@{/}" title="Back to Frontpage">
     &#8592;
   </a>
 
-  <div class="plugin-grid">
+  <section class="frontpage--plugin-container">
 
-    <th:block th:each="availablePlugin : ${availablePlugins}">
-      <a class="frontpage--link" th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}"
-         th:title="#{plugin.add}">
-        <div class="plugin-grid__cell plugin-grid__cell_add">
+    <div class="plugin-grid">
+
+      <th:block th:each="availablePlugin : ${availablePlugins}">
+        <a class="frontpage--link" th:href="@{/plugins/{id}(id=${availablePlugin.id}, configuration='yes')}"
+           th:title="#{plugin.add}">
+          <div class="plugin-grid__cell plugin-grid__cell_add">
           <span th:text="${availablePlugin.id}">
             availablePluginTitle
           </span>
-        </div>
-      </a>
-    </th:block>
+          </div>
+        </a>
+      </th:block>
 
-  </div>
+    </div>
 
-</section>
+  </section>
+</th:block>
 </body>
 </html>

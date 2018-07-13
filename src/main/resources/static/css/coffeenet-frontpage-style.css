@@ -159,10 +159,16 @@
 }
 
 .frontpage--back-button {
-  color: white;
+  color: #cfe9dd;
   text-decoration: none;
   font-size: 4rem;
   padding-left: 1rem;
+  width: 100px;
+  transition: color ease-in-out 100ms;
+}
+
+.frontpage--back-button:hover {
+  color: white;
 }
 
 .frontpage--link {
