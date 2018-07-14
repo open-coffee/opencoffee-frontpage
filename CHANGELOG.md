@@ -4,6 +4,7 @@
 
 * Add
   * new design with counter
+  * plugin instances are now configurable
 
 ## 0.2.0
 

@@ -16,11 +16,11 @@
 
     <form
       id="plugin-configuration-form"
-      th:action="@{/plugins/{id}(id=${plugin.id})}"
-      th:method="post"
+      th:action="${configurationInstance != null} ? '/plugins/' + ${plugin.id} + '/instances/' + ${pluginInstanceId} : '/plugins/' + ${plugin.id}"
+      th:method="${configurationInstance != null ? 'put' : 'post' }"
       class="plugin-configuration"
-      th:classappend="${fields.hasErrors() ? 'invalid' : ''}"
-    >
+      th:classappend="${fields.hasErrors() ? 'invalid' : ''}">
+
       <div class="plugin-configuration__fields">
         <th:block th:each="field : ${configuration}">
           <label th:for="${field.id}" for="id" th:text="${field.label}" class="plugin-configuration__label"></label>
@@ -28,7 +28,7 @@
             th:name="${field.id}"
             th:type="${field.type}"
             th:id="${field.id}"
-            th:value="${fields.getFieldValue(field.id)}"
+            th:value="${configurationInstance != null ? configurationInstance.get(field.id) : fields.getFieldValue(field.id)}"
             id="id"
             th:attr="required=${field.required ? '' : null}"
             class="plugin-configuration__input"
@@ -36,11 +36,11 @@
           />
           <span
             th:text="${fields.hasFieldErrors(field.id) ? #messages.msg(fields.getFieldError(field.id).getCode()) : ''}"
-            class="plugin-configuration__error"
-          />
+            class="plugin-configuration__error"></span>
+
         </th:block>
       </div>
-      <div class="button-toolbar">
+      <div class="button-toolbar ">
         <button th:text="${plugin.id}" th:title="#{plugin.add}" class="button button-toolbar-button">
           pluginId
         </button>

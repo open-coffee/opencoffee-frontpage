@@ -9,5 +9,7 @@ public interface PluginRepository extends MongoRepository<PluginInstance, String
 
     Set<PluginInstance> findAllByUsername(String username);
 
+    PluginInstance findById(UUID id);
+
     void deleteById(UUID id);
 }

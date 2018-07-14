@@ -18,6 +18,11 @@
           myPluginContent
         </div>
 
+        <a class="plugin-grid__cell__edit"
+          th:href="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}"
+          th:title="#{plugin.edit}">
+        </a>
+
         <form th:id="plugin-remove- + ${myPlugin.uuid}"
               th:action="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}"
               th:method="delete">

@@ -39,6 +39,13 @@ public class DefaultPluginService implements PluginService {
     }
 
     @Override
+    public Optional<PluginInstance> getPluginInstance(String pluginInstanceId) {
+
+        return Optional.ofNullable(pluginRepository.findById(UUID.fromString(pluginInstanceId)));
+    }
+
+
+    @Override
     public Set<PluginInstance> getPluginInstancesOf(String username) {
 
         return pluginRepository.findAllByUsername(username).stream()
@@ -63,6 +70,26 @@ public class DefaultPluginService implements PluginService {
             LOGGER.info("Saved {} with configuration {} for {}", pluginId, configurationInstance, username);
         } else {
             LOGGER.warn("Plugin {} does not exists, but {} tries to add it", pluginId, username);
+        }
+    }
+
+    @Override
+    public void updatePluginInstance(String pluginInstanceId, ConfigurationInstanceImpl configurationInstance) {
+        final Optional<PluginInstance> pluginInstance = getPluginInstance(pluginInstanceId);
+
+        if (pluginInstance.isPresent()) {
+            PluginInstance newPluginInstance = new PluginInstance(
+                pluginInstance.get().getId(),
+                pluginInstance.get().getUsername(),
+                new ConfigurationInstanceImpl(configurationInstance.getParams()),
+                pluginInstance.get().getPluginId()
+            );
+
+            pluginRepository.save(newPluginInstance);
+
+            LOGGER.info("Updated {} pluginInstance with {} new configuration ", pluginInstance.get(), configurationInstance);
+        } else {
+            LOGGER.warn("PluginInstance {} does not exists", pluginInstanceId);
         }
     }
 

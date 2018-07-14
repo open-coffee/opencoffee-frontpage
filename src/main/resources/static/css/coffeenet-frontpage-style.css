@@ -24,7 +24,7 @@
 }
 
 .plugin-grid__cell_added {
-  background: rgba(255,255,255,0.8);
+  background: rgba(255, 255, 255, 0.8);
 }
 
 .plugin-grid__cell_add {
@@ -54,6 +54,21 @@
   overflow-y: auto;
 }
 
+.plugin-grid__cell__edit:before {
+  content: '\270E';
+}
+
+.plugin-grid__cell__edit {
+  position: absolute;
+  bottom: 5px;
+  left: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: medium;
+}
+
+
 .plugin-grid__cell__close:before {
   content: '✕';
 }
@@ -63,6 +78,11 @@
   top: 5px;
   right: 15px;
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.plugin-grid__cell__close:hover, .plugin-grid__cell__edit:hover {
+  color: rgba(0, 0, 0, 1);
 }
 
 .plugin-configuration {
