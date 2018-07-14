@@ -24,7 +24,7 @@
 }
 
 .plugin-grid__cell_added {
-  background: white;
+  background: rgba(255,255,255,0.8);
 }
 
 .plugin-grid__cell_add {
@@ -133,7 +133,7 @@
 
 .frontpage--container {
   display: flex;
-  background-color: #4da97f8a;
+  background-color: #4da97f;
   height: 100%;
   flex-direction: column;
 }
