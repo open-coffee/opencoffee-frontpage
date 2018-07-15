@@ -2,6 +2,9 @@ sudo: required
 
 language: java
 
+before_install:
+  - sudo apt-get install -y markdown
+
 script: ./mvnw verify jacoco:report coveralls:report
 
 jdk:
@@ -14,6 +17,7 @@ before_deploy:
   - mvn -DskipTests package
   - export JAR_FILE=$(ls target/frontpage-*.jar)
   - echo "deploying $JAR_FILE to GitHub releases"
+  - export RELEASE_NOTES=$(awk -v start=1 '/##/{n++;next};n==start;n==start+1{exit}' CHANGELOG.md  | markdown | awk '{printf "%s",$0} END {print ""}')
 
 deploy:
   - provider: script
@@ -24,6 +28,7 @@ deploy:
     api_key:
       secure: M4gKoffL14CZtUCNciqaIBcMEs4n5zZ4C3JrMUFV7zSdt70apvMDKW4DY2FkPM6G6HqwN48XgT7c1CgkUhw4KZrGoLOcpBACVbhvxNk7dmVXMH3pxy74hPx7YRlz6vck9NlWupEJ5oYy0TpmAE+c5i9AhIs4vzLbwn+zFwlvjMdduPhv0iIM0ePSX6O/Tk6gWmcTeRG4s0Bm8YSdhYvyAXdW3m9dnmbWSB3/uKd0vlDQLK+cHa4kDRwtAOSehuMpn6/NlxebVhVmvNAYKao0N5QoXYPS5+Mtq4s+Ycj6FKb2aQCGYgKDBDYnAPYvZhiJ6lOcqyxkvaNUzjvw9Vp2qN3Hq9W2SUQaFguwoZ+MyOhA1/PJwZAYPg8Z/nmhUaB2B1g/0VHLQ4uKQCGS9bXwabiWxDA4PvCa0OBam/CBifTmafJyoWtX1DmwYBVkK/3CDP08Imae0A4QCcRlLm6TlaBugrQQ0TX2LM31K6flm0z745U94ZfkOyQsD5wU3CGnv4MiQn9nJrHIcR6Bq9kLPJANnWptgYb81y2WT2TABaSo7TLsr4KKqLxTLuRjEH1gA73j/FCSdq8aPk52iEF+RCiJn2uEJD/cX1Bf8Dm6WjQPfLMzf4y4HHWv8G1VhKVtnVBIIZUvuHCQfRoHKei5dlg7H36EMOD0mjckRWqYpFs=
     file: "${JAR_FILE}"
+    body: "${RELEASE_NOTES}"
     skip_cleanup: true
     on:
       tags: true
