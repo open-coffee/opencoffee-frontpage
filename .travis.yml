@@ -14,14 +14,14 @@ services:
 - docker
 
 before_deploy:
-  - mvn -DskipTests package
+  - ./mvnw -DskipTests package
   - export JAR_FILE=$(ls target/frontpage-*.jar)
   - echo "deploying $JAR_FILE to GitHub releases"
   - export RELEASE_NOTES=$(awk -v start=1 '/##/{n++;next};n==start;n==start+1{exit}' CHANGELOG.md  | markdown | awk '{printf "%s",$0} END {print ""}')
 
 deploy:
   - provider: script
-    script: mvn -DskipTests package -Ddocker.username=$DOCKER_USER -Ddocker.password=$DOCKER_PASS docker:build docker:push
+    script: ./mvnw -DskipTests package -Ddocker.username=$DOCKER_USER -Ddocker.password=$DOCKER_PASS docker:build docker:push
     on:
       tags: true
   - provider: releases
