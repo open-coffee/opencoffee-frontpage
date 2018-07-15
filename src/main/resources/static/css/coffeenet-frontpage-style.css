@@ -1,3 +1,9 @@
+.visually-hidden {
+  position: absolute;
+  left: -99999999px;
+  top: -99999999px;
+}
+
 .plugin-grid {
   /* Grid Fallback */
   display: flex;
@@ -27,6 +33,11 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
+.plugin-grid__cell_header {
+  display: flex;
+  flex-direction: row;
+}
+
 .plugin-grid__cell_add {
   color: #ffffff;
   border: 2px white dashed;
@@ -44,6 +55,7 @@
 .plugin-grid__cell__title {
   margin: 0;
   padding: 1rem;
+  flex: 1 0 0;
 }
 
 .plugin-grid__cell__content {
@@ -54,35 +66,102 @@
   overflow-y: auto;
 }
 
-.plugin-grid__cell__edit:before {
-  content: '\270E';
+.plugin-controls {
+  position: relative;
+  margin-left: auto;
+  padding: 0.5rem;
+  text-align: right;
+  font-size: 0.8rem;
+  user-select: none;
 }
 
-.plugin-grid__cell__edit {
-  position: absolute;
-  bottom: 5px;
-  left: 15px;
+.plugin-controls > input[type="checkbox"] {
+  display: none;
+}
+
+.plugin-controls__button {
   cursor: pointer;
+}
+
+.plugin-controls__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.plugin-controls__list {
+  z-index: 1;
+  position: absolute;
+  top: 2rem;
+  right: 0.5rem;
+  list-style-type: none;
+  margin: 0;
+  padding: 0.3rem 0;
+  background-color: rgba(0,0,0,0.9);
+  color: white;
+  text-align: left;
+  /* is visible when checkbox is checked  */
+  display: none;
+}
+
+/* show controls when checkbox is checked */
+.plugin-controls > input:checked + .plugin-controls__button + .plugin-controls__list {
+  display: block;
+}
+
+.plugin-controls__list a {
+  color: #ffffff;
+}
+
+.plugin-controls__list__item {
+  background-color: inherit;
+  transition: all ease-in-out 100ms;
+}
+
+.plugin-controls__list__item:hover {
+  background-color: rgba(255, 255, 255, 0.33)
+}
+
+.plugin-controls__list__item:not(:first-child) {
+  margin-top: 0.3rem;
+}
+
+.plugin-controls__edit {
+  padding: 0.2rem 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   text-decoration: none;
-  color: rgba(0, 0, 0, 0.5);
-  font-size: medium;
+  transition: all ease-in-out 100ms;
 }
 
-
-.plugin-grid__cell__close:before {
-  content: '✕';
+.plugin-controls__edit__icon {
+  margin-right: 0.5rem;
+  height: 1rem;
+  width: 1rem;
+  stroke: white;
+  stroke-width: 2px;
 }
 
-.plugin-grid__cell__close {
-  position: absolute;
-  top: 5px;
-  right: 15px;
+.plugin-controls__remove {
+  padding: 0.2rem 0.5rem;
+  outline: none;
+  border: none;
+  background: inherit;
+  color: inherit;
+  font-size: inherit;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.5);
+}
+.plugin-controls__remove > span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.plugin-grid__cell__close:hover, .plugin-grid__cell__edit:hover {
-  color: rgba(0, 0, 0, 1);
+.plugin-controls__remove__icon {
+  margin-right: 0.5rem;
+  width: 1rem;
+  height: 1rem;
+  stroke: white;
 }
 
 .plugin-configuration {
