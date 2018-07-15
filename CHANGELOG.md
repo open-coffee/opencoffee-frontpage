@@ -1,35 +1,43 @@
 # Changelog
+All notable changes to this project will be documented in this file.
 
-## 0.3.0-SNAPSHOT
+The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
+and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-* Add
-  * new design with counter
-  * plugin instances are now configurable
 
-## 0.2.0
+## [Unreleased]
+### Added
+- new design with counter
+- plugin instances are now configurable
 
-* Upgrade
-  * CoffeeNet Starter Parent to 0.31.0
-  * Frontpage-Plugin-Api to 0.6.0
 
-* Add
-  * Configuration Validation
+## [0.2.0]
+### Added
+- Configuration Validation
 
-* Fix
-  * Overlapping scroll and close area
+### Changed
+- CoffeeNet Starter Parent to 0.31.0
+- Frontpage-Plugin-Api to 0.6.0
 
-## 0.1.1
+### Fixed
+- Overlapping scroll and close area
 
-* Fix
-  * Do not use Snapshot versions for `frontpage-plugin-api`
+
+## [0.1.1]
+### Fixed
+- Do not use Snapshot versions for `frontpage-plugin-api`
 
 
 ## 0.1.0
-
-* Loads plugin and displays them
-  * Add new plugins next to the jar in the `plugins/`
+### Added
+- Loads plugin and displays them
+  - Add new plugins next to the jar in the `plugins/`
     directory or change the location with `loader.path`
     in the `loader.properties`.
-  * Add persistence layer with a mongodb
-  * Plugin instance configuration
-  * Minor validation of of a new plugin instance
+  - Add persistence layer with a mongodb
+  - Plugin instance configuration
+  - Minor validation of of a new plugin instance
+
+[Unreleased]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.2.0...HEAD
+[0.2.0]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.1.1...0.2.0
+[0.1.1]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.1.0...0.1.1
