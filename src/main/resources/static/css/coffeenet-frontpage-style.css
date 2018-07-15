@@ -61,9 +61,8 @@
 }
 
 .plugin-controls {
-  position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  position: relative;
+  padding: 0.5rem;
   text-align: right;
   font-size: 0.8rem;
   user-select: none;
@@ -83,6 +82,10 @@
 }
 
 .plugin-controls__list {
+  z-index: 1;
+  position: absolute;
+  top: 2rem;
+  right: 0.5rem;
   list-style-type: none;
   margin: 0;
   padding: 0.3rem 0;
