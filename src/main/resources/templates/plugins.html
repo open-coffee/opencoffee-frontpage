@@ -9,43 +9,42 @@
   <div class="plugin-grid">
     <th:block th:each="myPlugin : ${myPlugins}">
       <div class="plugin-grid__cell plugin-grid__cell_added">
-        <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(myPlugin.title)}"
-            th:text="${myPlugin.title}">
-          myPluginTitle
-        </h2>
-
-        <div class="plugin-controls">
-          <input type="checkbox" th:id="plugin-controls- + ${myPlugin.uuid}" id="plugin-controls" />
-          <label th:for="plugin-controls- + ${myPlugin.uuid}" for="plugin-controls" class="plugin-controls__button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="16" height="16" class="plugin-controls__icon">
-              <circle cx="64" cy="64" r="50" fill="#fff"/>
-              <path d="M64 117c-29.2 0-53-23.8-53-53s23.8-53 53-53 53 23.8 53 53-23.8 53-53 53zm0-100c-25.9 0-47 21.1-47 47s21.1 47 47 47 47-21.1 47-47-21.1-47-47-47z" fill="#444b54"/>
-              <path d="M86.5 52h-45c-1.7 0-3-1.3-3-3s1.3-3 3-3h45c1.7 0 3 1.3 3 3s-1.3 3-3 3zM86.5 67h-45c-1.7 0-3-1.3-3-3s1.3-3 3-3h45c1.7 0 3 1.3 3 3s-1.3 3-3 3z" fill="#444b54"/>
-              <g>
-                <path d="M86.5 82h-45c-1.7 0-3-1.3-3-3s1.3-3 3-3h45c1.7 0 3 1.3 3 3s-1.3 3-3 3z" fill="#444b54"/>
-              </g>
-            </svg>
-            <span th:text="#{plugin.actions}" class="visually-hidden">
+        <header class="plugin-grid__cell_header">
+          <h2 class="plugin-grid__cell__title" th:unless="${#strings.isEmpty(myPlugin.title)}"
+              th:text="${myPlugin.title}">
+          </h2>
+          <div class="plugin-controls">
+            <input type="checkbox" th:id="plugin-controls- + ${myPlugin.uuid}" id="plugin-controls" />
+            <label th:for="plugin-controls- + ${myPlugin.uuid}" for="plugin-controls" class="plugin-controls__button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="16" height="16" class="plugin-controls__icon">
+                <circle cx="64" cy="64" r="50" fill="#fff"/>
+                <path d="M64 117c-29.2 0-53-23.8-53-53s23.8-53 53-53 53 23.8 53 53-23.8 53-53 53zm0-100c-25.9 0-47 21.1-47 47s21.1 47 47 47 47-21.1 47-47-21.1-47-47-47z" fill="#444b54"/>
+                <path d="M86.5 52h-45c-1.7 0-3-1.3-3-3s1.3-3 3-3h45c1.7 0 3 1.3 3 3s-1.3 3-3 3zM86.5 67h-45c-1.7 0-3-1.3-3-3s1.3-3 3-3h45c1.7 0 3 1.3 3 3s-1.3 3-3 3z" fill="#444b54"/>
+                <g>
+                  <path d="M86.5 82h-45c-1.7 0-3-1.3-3-3s1.3-3 3-3h45c1.7 0 3 1.3 3 3s-1.3 3-3 3z" fill="#444b54"/>
+                </g>
+              </svg>
+              <span th:text="#{plugin.actions}" class="visually-hidden">
               Settings
             </span>
-          </label>
-          <ul class="plugin-controls__list">
-            <li class="plugin-controls__list__item">
-              <a class="plugin-controls__edit"
-                 th:href="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="plugin-controls__edit__icon">
-                  <path d="M14.5 5.5L3 17v4h4L18.5 9.5zM21.707 4.879l-2.586-2.586c-.391-.391-1.024-.391-1.414 0L16 4l4 4 1.707-1.707c.391-.391.391-1.024 0-1.414z"/>
-                </svg>
-                <span th:text="#{plugin.actions.edit}">
+            </label>
+            <ul class="plugin-controls__list">
+              <li class="plugin-controls__list__item">
+                <a class="plugin-controls__edit"
+                   th:href="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" class="plugin-controls__edit__icon">
+                    <path d="M14.5 5.5L3 17v4h4L18.5 9.5zM21.707 4.879l-2.586-2.586c-.391-.391-1.024-.391-1.414 0L16 4l4 4 1.707-1.707c.391-.391.391-1.024 0-1.414z"/>
+                  </svg>
+                  <span th:text="#{plugin.actions.edit}">
                   Edit
                 </span>
-              </a>
-            </li>
-            <li class="plugin-controls__list__item">
-              <form th:id="plugin-remove- + ${myPlugin.uuid}"
-                    th:action="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}"
-                    th:method="delete">
-                <button class="plugin-controls__remove" type="submit">
+                </a>
+              </li>
+              <li class="plugin-controls__list__item">
+                <form th:id="plugin-remove- + ${myPlugin.uuid}"
+                      th:action="@{/plugins/{pluginId}/instances/{pluginInstanceId}(pluginId=${myPlugin.pluginId}, pluginInstanceId=${myPlugin.uuid})}"
+                      th:method="delete">
+                  <button class="plugin-controls__remove" type="submit">
                   <span>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="16" height="16" class="plugin-controls__remove__icon">
                       <path d="M21.736 19.64l-2.098 2.096c-.383.386-1.011.386-1.396 0l-5.241-5.239-5.241 5.238c-.385.386-1.014.386-1.397-.002L4.264 19.64c-.385-.386-.385-1.011 0-1.398L9.505 13l-5.24-5.24c-.384-.387-.384-1.016 0-1.398l2.098-2.097c.384-.388 1.013-.388 1.397 0L13 9.506l5.242-5.241c.386-.388 1.014-.388 1.396 0l2.098 2.094c.386.386.386 1.015.001 1.401L16.496 13l5.24 5.241c.385.388.385 1.013 0 1.399z"/>
@@ -54,11 +53,12 @@
                       Remove
                     </span>
                   </span>
-                </button>
-              </form>
-            </li>
-          </ul>
-        </div>
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </header>
         <div class="plugin-grid__cell__content" th:utext="${myPlugin.content}">
           myPluginContent
         </div>

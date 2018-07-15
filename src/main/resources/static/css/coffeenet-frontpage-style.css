@@ -33,6 +33,11 @@
   background: rgba(255, 255, 255, 0.8);
 }
 
+.plugin-grid__cell_header {
+  display: flex;
+  flex-direction: row;
+}
+
 .plugin-grid__cell_add {
   color: #ffffff;
   border: 2px white dashed;
@@ -50,6 +55,7 @@
 .plugin-grid__cell__title {
   margin: 0;
   padding: 1rem;
+  flex: 1 0 0;
 }
 
 .plugin-grid__cell__content {
@@ -62,6 +68,7 @@
 
 .plugin-controls {
   position: relative;
+  margin-left: auto;
   padding: 0.5rem;
   text-align: right;
   font-size: 0.8rem;
