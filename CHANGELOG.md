@@ -5,11 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
-## [Unreleased]
+## [0.3.0]
 ### Added
-- new design with counter
-- plugin instances are now configurable
-- actions/control menu on the top right of a plugin card
+- New design with counter
+- Plugin instances are now editable
+- Actions/control menu on the top right of a plugin card
 
 
 ## [0.2.0]
@@ -39,6 +39,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
   - Plugin instance configuration
   - Minor validation of of a new plugin instance
 
-[Unreleased]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.2.0...HEAD
+[0.3.0]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.2.0...0.3.0
 [0.2.0]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.1.1...0.2.0
 [0.1.1]: https://github.com/coffeenet/coffeenet-frontpage/compare/0.1.0...0.1.1
