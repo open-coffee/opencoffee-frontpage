@@ -4,7 +4,7 @@
 # CoffeeNet Frontpage
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/coffeenet/coffeenet.github.io/blob/code/themes/coffeenet/static/img/coffeenet_logo.png" width="256px" alt="CoffeeNet Logo" />
+    <img src="https://raw.githubusercontent.com/coffeenet/coffeenet.github.io/code/themes/coffeenet/static/img/coffeenet_logo.png" width="256px" alt="CoffeeNet Logo" />
 </p>
 
 <p align="center">
