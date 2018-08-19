@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Sonarcloud check
+- Possibility to install a plugin via the frontpage
 
 ### Changed
 - CoffeeNet Starter Parent to version `0.38.2`
