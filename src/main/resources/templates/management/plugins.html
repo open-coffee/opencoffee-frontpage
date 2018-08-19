@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="en"
+      layout:decorator="layout">
+
+<body>
+<section layout:fragment="frontpage-main" class="frontpage--plugin-container">
+
+  <th:block th:each="availablePlugin : ${availablePlugins}">
+
+    <h1 th:text="${availablePlugin.name}">pluginTitle</h1>
+
+    <th:block th:each="version : ${availablePlugin.versions}">
+
+      <span th:text="${version.name}"></span>
+
+      <form style="display: inline-block" th:action="@{/plugins-install}" th:method="put">
+        <input type="hidden" name="url" th:value="${version.url}"/>
+        <button type="submit" th:title="${version.name}">Install</button>
+      </form>
+    </th:block>
+
+  </th:block>
+
+</section>
+
+</body>
+</html>

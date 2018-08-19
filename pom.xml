@@ -79,6 +79,12 @@
       <version>0.8.0</version>
     </dependency>
 
+    <dependency>
+      <groupId>org.kohsuke</groupId>
+      <artifactId>github-api</artifactId>
+      <version>1.89</version>
+    </dependency>
+
     <!-- Persistence -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -89,6 +95,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
+    </dependency>
+
+    <!-- Configuration processor -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
     </dependency>
 
     <!-- Test -->

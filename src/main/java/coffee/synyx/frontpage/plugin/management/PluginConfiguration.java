@@ -1,7 +1,9 @@
-package coffee.synyx.frontpage.installer;
+package coffee.synyx.frontpage.plugin.management;
 
+import org.kohsuke.github.GitHubBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * @author Tobias Schneider
@@ -13,5 +15,17 @@ public class PluginConfiguration {
     PluginConfigurationProperties pluginConfigurationProperties() {
 
         return new PluginConfigurationProperties();
+    }
+
+    @Bean
+    GitHubBuilder gitHubBuilder() {
+
+        return new GitHubBuilder();
+    }
+
+    @Bean
+    RestTemplate restTemplate(){
+
+        return new RestTemplate();
     }
 }

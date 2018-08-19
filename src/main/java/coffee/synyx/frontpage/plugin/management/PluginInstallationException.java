@@ -1,4 +1,4 @@
-package coffee.synyx.frontpage.installer;
+package coffee.synyx.frontpage.plugin.management;
 
 /**
  * @author Tobias Schneider

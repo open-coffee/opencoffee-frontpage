@@ -17,3 +17,9 @@ spring:
       password: frontpage
       authentication-database: admin
       database: frontpage
+
+frontpage:
+    plugins:
+      resource:
+        - repositoryName: coffeenet/coffeenet-frontpage-plugin-feed
+        - repositoryName: coffeenet/coffeenet-frontpage-plugin-influx
