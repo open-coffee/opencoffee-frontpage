@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/coffeenet/coffeenet-frontpage.svg?branch=master)](https://travis-ci.org/coffeenet/coffeenet-frontpage)
-[![Coverage Status](https://coveralls.io/repos/github/coffeenet/coffeenet-frontpage/badge.svg?branch=master)](https://coveralls.io/github/coffeenet/coffeenet-frontpage?branch=master)
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=coffee.synyx:coffeenet-frontpage&metric=coverage)](https://sonarcloud.io/dashboard?id=coffee.synyx:coffeenet-frontpage)
 
 # CoffeeNet Frontpage
 
