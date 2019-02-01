@@ -30,30 +30,7 @@
     <developerConnection>scm:git:git@github.com:coffeenet/coffeenet-frontpage.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-
-  <repositories>
-    <repository>
-      <id>releases.public.nexus.synyx.de</id>
-      <url>http://nexus.synyx.de/content/repositories/public-releases</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>snapshots.public.nexus.synyx.de</id>
-      <url>http://nexus.synyx.de/content/repositories/public-snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
+  
   <dependencies>
     <!-- CoffeeNet -->
     <dependency>
@@ -97,7 +74,7 @@
     </dependency>
 
     <dependency>
-      <groupId>rocks.coffeenet</groupId>
+      <groupId>coffee.synyx</groupId>
       <artifactId>frontpage-plugin-api</artifactId>
       <version>0.6.0</version>
     </dependency>
