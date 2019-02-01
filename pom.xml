@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>coffee.synyx</groupId>
+    <groupId>rocks.coffeenet</groupId>
     <artifactId>coffeenet-starter-parent</artifactId>
     <version>0.37.0</version>
   </parent>
@@ -57,19 +57,19 @@
   <dependencies>
     <!-- CoffeeNet -->
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-logging</artifactId>
     </dependency>
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-discovery</artifactId>
     </dependency>
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-security</artifactId>
     </dependency>
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-monitoring</artifactId>
     </dependency>
 
@@ -86,7 +86,7 @@
 
     <!-- Frontend -->
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-navigation-thymeleaf</artifactId>
     </dependency>
 
@@ -97,7 +97,7 @@
     </dependency>
 
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>frontpage-plugin-api</artifactId>
       <version>0.6.0</version>
     </dependency>
