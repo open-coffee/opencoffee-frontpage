@@ -51,7 +51,7 @@ jobs:
           ./mvnw --batch-mode
           docker:build
           docker:push
-          -Ddocker.name=coffeenet/frontpage/frontpage
+          -Ddocker.name=coffeenet/coffeenet-frontpage/coffeenet-frontpage
           -Ddocker.push.registry=docker.pkg.github.com
           -Ddocker.push.username=${{ github.actor }}
           -Ddocker.push.password=${{ secrets.GITHUB_TOKEN }}
