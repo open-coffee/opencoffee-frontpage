@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/coffeenet/coffeenet-frontpage.svg?branch=master)](https://travis-ci.org/coffeenet/coffeenet-frontpage)
+[![Build Status](https://github.com/coffeenet/coffeenet-frontpage/workflows/CoffeeNet%20Frontpage%20CI/badge.svg)](https://github.com/coffeenet/coffeenet-frontpage/actions?query=workflow%3A%22CoffeeNet+Frontpage+CI%22)
 [![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=rocks.coffeenet:frontpage&metric=coverage)](https://sonarcloud.io/dashboard?id=rocks.coffeenet:frontpage)
 
 # CoffeeNet Frontpage
