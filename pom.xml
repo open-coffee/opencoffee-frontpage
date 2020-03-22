@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>coffee.synyx</groupId>
+    <groupId>rocks.coffeenet</groupId>
     <artifactId>coffeenet-starter-parent</artifactId>
-    <version>0.37.0</version>
+    <version>0.38.1</version>
   </parent>
 
   <name>CoffeeNet Frontpage</name>
@@ -30,46 +30,23 @@
     <developerConnection>scm:git:git@github.com:coffeenet/coffeenet-frontpage.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
-
-  <repositories>
-    <repository>
-      <id>releases.public.nexus.synyx.de</id>
-      <url>http://nexus.synyx.de/content/repositories/public-releases</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>snapshots.public.nexus.synyx.de</id>
-      <url>http://nexus.synyx.de/content/repositories/public-snapshots</url>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-    </repository>
-  </repositories>
-
+  
   <dependencies>
     <!-- CoffeeNet -->
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-logging</artifactId>
     </dependency>
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-discovery</artifactId>
     </dependency>
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-security</artifactId>
     </dependency>
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-monitoring</artifactId>
     </dependency>
 
@@ -86,7 +63,7 @@
 
     <!-- Frontend -->
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>starter-navigation-thymeleaf</artifactId>
     </dependency>
 
