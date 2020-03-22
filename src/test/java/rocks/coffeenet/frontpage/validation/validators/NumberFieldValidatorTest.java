@@ -1,9 +1,9 @@
 package rocks.coffeenet.frontpage.validation.validators;
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationField;
-import coffee.synyx.frontpage.plugin.api.ConfigurationFieldType;
 import org.junit.Test;
 import org.springframework.validation.Errors;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationField;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationFieldType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;

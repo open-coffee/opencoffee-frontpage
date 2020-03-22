@@ -1,10 +1,6 @@
 package rocks.coffeenet.frontpage;
 
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
-import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
-import coffee.synyx.frontpage.plugin.api.FrontpagePluginQualifier;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +8,10 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.plugin.core.PluginRegistry;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationDescription;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationInstance;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePluginQualifier;
 
 import java.util.HashMap;
 import java.util.List;

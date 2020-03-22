@@ -1,13 +1,13 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
-import coffee.synyx.frontpage.plugin.api.FrontpagePluginQualifier;
 import io.netty.util.internal.ConcurrentSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.plugin.core.PluginRegistry;
 import org.springframework.stereotype.Service;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePluginQualifier;
 
 import java.util.List;
 import java.util.Optional;

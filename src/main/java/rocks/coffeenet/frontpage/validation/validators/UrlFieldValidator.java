@@ -1,10 +1,10 @@
 package rocks.coffeenet.frontpage.validation.validators;
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationField;
-import coffee.synyx.frontpage.plugin.api.ConfigurationFieldType;
-import coffee.synyx.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationField;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationFieldType;
+import rocks.coffeenet.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 
 import java.net.MalformedURLException;
 import java.net.URL;

@@ -1,9 +1,9 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.plugin.core.config.EnablePluginRegistries;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
 
 
 /**

@@ -1,6 +1,6 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationInstance;
 
 import java.util.Map;
 

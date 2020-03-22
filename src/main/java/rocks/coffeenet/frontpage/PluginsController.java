@@ -1,9 +1,9 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.autoconfigure.security.service.CoffeeNetCurrentUserService;
-import coffee.synyx.autoconfigure.security.service.CoffeeNetUserDetails;
-import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
+import rocks.coffeenet.autoconfigure.security.service.CoffeeNetCurrentUserService;
+import rocks.coffeenet.autoconfigure.security.service.CoffeeNetUserDetails;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationDescription;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
 import rocks.coffeenet.frontpage.validation.ConfigurationInstanceValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

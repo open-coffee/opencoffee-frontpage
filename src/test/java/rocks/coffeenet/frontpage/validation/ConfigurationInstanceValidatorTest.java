@@ -1,12 +1,12 @@
 package rocks.coffeenet.frontpage.validation;
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
-import coffee.synyx.frontpage.plugin.api.ConfigurationField;
-import coffee.synyx.frontpage.plugin.api.ConfigurationFieldType;
-import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
-import coffee.synyx.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 import org.junit.Test;
 import org.springframework.validation.Errors;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationDescription;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationField;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationFieldType;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationInstance;
+import rocks.coffeenet.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 
 import java.util.HashSet;
 import java.util.Set;

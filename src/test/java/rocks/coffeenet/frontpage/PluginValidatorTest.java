@@ -1,14 +1,14 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
-import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.context.event.ContextRefreshedEvent;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationDescription;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationInstance;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
 
 import java.util.Optional;
 

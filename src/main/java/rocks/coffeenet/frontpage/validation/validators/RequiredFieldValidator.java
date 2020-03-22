@@ -1,10 +1,10 @@
 package rocks.coffeenet.frontpage.validation.validators;
 
-import coffee.synyx.frontpage.plugin.api.ConfigurationField;
-import coffee.synyx.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationField;
+import rocks.coffeenet.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 
 @Component
 public class RequiredFieldValidator implements ConfigurationFieldValidator {

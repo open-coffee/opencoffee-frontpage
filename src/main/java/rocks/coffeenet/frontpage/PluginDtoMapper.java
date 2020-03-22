@@ -1,6 +1,7 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
+
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
 
 import java.util.List;
 

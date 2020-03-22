@@ -1,13 +1,13 @@
 package rocks.coffeenet.frontpage;
 
-import coffee.synyx.autoconfigure.security.service.CoffeeNetCurrentUserService;
-import coffee.synyx.autoconfigure.security.service.HumanCoffeeNetUser;
-import coffee.synyx.frontpage.plugin.api.ConfigurationDescription;
-import coffee.synyx.frontpage.plugin.api.ConfigurationField;
-import coffee.synyx.frontpage.plugin.api.ConfigurationFieldType;
-import coffee.synyx.frontpage.plugin.api.ConfigurationInstance;
-import coffee.synyx.frontpage.plugin.api.FrontpagePlugin;
-import coffee.synyx.frontpage.plugin.api.validation.ConfigurationFieldValidator;
+import rocks.coffeenet.autoconfigure.security.service.CoffeeNetCurrentUserService;
+import rocks.coffeenet.autoconfigure.security.service.HumanCoffeeNetUser;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationDescription;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationField;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationFieldType;
+import rocks.coffeenet.frontpage.plugin.api.ConfigurationInstance;
+import rocks.coffeenet.frontpage.plugin.api.FrontpagePlugin;
+import rocks.coffeenet.frontpage.plugin.api.validation.ConfigurationFieldValidator;
 import rocks.coffeenet.frontpage.validation.ConfigurationInstanceValidator;
 import rocks.coffeenet.frontpage.validation.validators.NumberFieldValidator;
 import rocks.coffeenet.frontpage.validation.validators.RequiredFieldValidator;
