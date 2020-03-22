@@ -74,7 +74,7 @@
     </dependency>
 
     <dependency>
-      <groupId>coffee.synyx</groupId>
+      <groupId>rocks.coffeenet</groupId>
       <artifactId>frontpage-plugin-api</artifactId>
       <version>0.8.0</version>
     </dependency>
