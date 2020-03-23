@@ -1,4 +1,4 @@
-package coffee.synyx.frontpage.plugin.management;
+package rocks.coffeenet.frontpage.plugin.management;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

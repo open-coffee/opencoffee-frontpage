@@ -1,4 +1,4 @@
-package coffee.synyx.frontpage.plugin.management;
+package rocks.coffeenet.frontpage.plugin.management;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.boot.context.properties.ConfigurationProperties;

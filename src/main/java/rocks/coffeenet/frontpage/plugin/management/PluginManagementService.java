@@ -1,6 +1,6 @@
-package coffee.synyx.frontpage.plugin.management;
+package rocks.coffeenet.frontpage.plugin.management;
 
-import coffee.synyx.frontpage.plugin.management.PluginConfigurationProperties.Resource;
+import rocks.coffeenet.frontpage.plugin.management.PluginConfigurationProperties.Resource;
 import org.kohsuke.github.GHRelease;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.GitHubBuilder;

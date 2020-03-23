@@ -1,4 +1,4 @@
-package coffee.synyx.frontpage.plugin.management;
+package rocks.coffeenet.frontpage.plugin.management;
 
 import org.kohsuke.github.GitHubBuilder;
 import org.springframework.context.annotation.Bean;

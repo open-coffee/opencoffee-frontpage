@@ -1,4 +1,4 @@
-package coffee.synyx.frontpage.plugin.management;
+package rocks.coffeenet.frontpage.plugin.management;
 
 /**
  * @author Tobias Schneider
